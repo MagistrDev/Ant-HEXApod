@@ -7,7 +7,7 @@ int main(void) {
     printf("Failed to open /dev/i2c-1\n");
     return 1;
   }
-
+  printf("%x\n",I2C_SLAVE);
   int status = ioctl(fd, I2C_SLAVE, 0x41);
   if (status == -1) {
     printf("Failed to acquire bus access and/or talk to slave.\n");
