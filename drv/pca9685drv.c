@@ -8,7 +8,7 @@ int main(void) {
     return 1;
   }
 
-  int status = ioctl(fd, I2C_SLAVE, 0x60);
+  int status = ioctl(fd, I2C_SLAVE, 0x40);
   if (status == -1) {
     printf("Failed to acquire bus access and/or talk to slave.\n");
     return 2;
