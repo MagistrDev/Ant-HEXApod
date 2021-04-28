@@ -22,6 +22,7 @@ int main(void) {
         printf("Failed to write register 0x0C.\n");
         return 3;
     }
+    printf("%i\n",buffer[0]);
     usleep(500000);
   }
 
