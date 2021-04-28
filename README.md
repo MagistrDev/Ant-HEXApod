@@ -1,4 +1,4 @@
 # Ant-HEXApod
 development of a hexapod from scratch
 
-web-site on hexapod https://sequestered-dugong-2110.dataplicity.io/
+web-site on hexapod https://shaggier-beaver-1025.dataplicity.io/
