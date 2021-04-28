@@ -1,5 +1,7 @@
 #include "pca9685drv.h"
 
+#include <linux/module.h>
+#include <linux/init.h>
 
 int main(void) {
   int fd = open("/dev/i2c-1", O_RDWR | O_NONBLOCK);
