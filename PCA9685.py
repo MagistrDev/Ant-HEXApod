@@ -89,6 +89,13 @@ class PCA9685(object):
         self.i2cBus.write_byte_data(self.address, LED0_OFF_L + 4 * channel, int(off) & 0xFF)
         self.i2cBus.write_byte_data(self.address, LED0_OFF_H + 4 * channel, int(off) >> 8)
  
+# LED0_ON_L = 0x06
+# LED0_ON_H = 0x07
+# LED0_OFF_L = 0x08
+# LED0_OFF_H = 0x09
+
+# 6 + 4 * 11
+
     def set_all_pwm(self, on, off):
         """Sets all PWM channels."""
         self.i2cBus.write_byte_data(self.address, ALL_LED_ON_L, on & 0xFF)
