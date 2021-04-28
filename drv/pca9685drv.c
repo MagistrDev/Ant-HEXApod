@@ -14,9 +14,9 @@ int main(void) {
     return 2;
   }
 
-  unsigned char buffer[1] = {0};
+  unsigned char buffer[1] = {7};
   while (1){
-    buffer[0] = (buffer[0] == 7) ? 0 : 1;
+    buffer[0] = ((buffer[0] == 7) ? 1 : 7);
     status = write(fd, buffer, 1);
     if (status == -1) {
         printf("Failed to write register 0x0C.\n");
