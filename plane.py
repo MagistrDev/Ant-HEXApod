@@ -96,7 +96,7 @@ def kinematic_calculate_angles(pindex):
         return False
     if (info._links[LINK_FEMUR]._angle < info._links[LINK_FEMUR]._min_angle or info._links[LINK_FEMUR]._angle > info._links[LINK_FEMUR]._max_angle):
         return False
-    if (info._links[LINK_TIBIA]._angle < info._links[LINK_TIBIA].min_angle or info._links[LINK_TIBIA]._angle > info._links[LINK_TIBIA]._max_angle):
+    if (info._links[LINK_TIBIA]._angle < info._links[LINK_TIBIA]._min_angle or info._links[LINK_TIBIA]._angle > info._links[LINK_TIBIA]._max_angle):
         return False
     return True
 
