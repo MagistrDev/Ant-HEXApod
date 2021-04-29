@@ -2,8 +2,8 @@ import initant as ant
 import plane
 from plane import pos_arm,DEG_TO_RAD, RAD_TO_DEG
 import time
-from math import sin, cos, atan2, atan, pi, pow, sqrt
-ant.def_pos()
+from emath import sin, cos, atan2, atan, pi, pow, sqrt
+ant.df_pos()
 
 # def pos_arm(index, x,y,z):
 #     plane.set_point(index, x, y ,z)
