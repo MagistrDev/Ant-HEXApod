@@ -51,12 +51,12 @@ def set_point(index,x,y,z):
 def kinematic_calculate_angles(pindex):
     global planes
     info = planes[pindex]
-    coxa_zero_rotate_deg = info.links[LINK_COXA]._zero_rotate
-    femur_zero_rotate_deg = info.links[LINK_FEMUR]._zero_rotate
-    tibia_zero_rotate_deg = info.links[LINK_TIBIA]._zero_rotate
-    coxa_length = info.links[LINK_COXA]._length
-    femur_length = info.links[LINK_FEMUR]._length
-    tibia_length = info.links[LINK_TIBIA]._length
+    coxa_zero_rotate_deg = info._links[LINK_COXA]._zero_rotate
+    femur_zero_rotate_deg = info._links[LINK_FEMUR]._zero_rotate
+    tibia_zero_rotate_deg = info._links[LINK_TIBIA]._zero_rotate
+    coxa_length = info._links[LINK_COXA]._length
+    femur_length = info._links[LINK_FEMUR]._length
+    tibia_length = info._links[LINK_TIBIA]._length
     x = info._position._x
     y = info._position._z
     z = info._position._z
@@ -67,7 +67,7 @@ def kinematic_calculate_angles(pindex):
     z1 = -x * math.sin(coxa_zero_rotate_rad) + z * math.cos(coxa_zero_rotate_rad)
     # Calculate COXA angle
     coxa_angle_rad = math.atan2(z1, x1)
-    info.links[LINK_COXA]._angle = RAD_TO_DEG(coxa_angle_rad)
+    info._links[LINK_COXA]._angle = RAD_TO_DEG(coxa_angle_rad)
     # Prepare for calculation FEMUR and TIBIA angles
     # Move to (X*, Y*) coordinate system (rotate on axis Y)
     x1 = x1 * math.cos(coxa_angle_rad) + z1 * math.sin(coxa_angle_rad)
@@ -86,17 +86,17 @@ def kinematic_calculate_angles(pindex):
     alpha = math.acos( (b * b + c * c - a * a) / (2 * b * c))
     gamma = math.acos( (a * a + b * b - c * c) / (2 * a * b))
     # Calculate FEMUR and TIBIA angle
-    info.links[LINK_FEMUR]._angle = femur_zero_rotate_deg - RAD_TO_DEG(alpha) - RAD_TO_DEG(fi)
-    info.links[LINK_TIBIA]._angle = RAD_TO_DEG(gamma) - tibia_zero_rotate_deg
-    # print(info.links[LINK_COXA].angle)
-    # print(info.links[LINK_FEMUR].angle)
-    # print(info.links[LINK_TIBIA].angle)
+    info._links[LINK_FEMUR]._angle = femur_zero_rotate_deg - RAD_TO_DEG(alpha) - RAD_TO_DEG(fi)
+    info._links[LINK_TIBIA]._angle = RAD_TO_DEG(gamma) - tibia_zero_rotate_deg
+    # print(info._links[LINK_COXA].angle)
+    # print(info._links[LINK_FEMUR].angle)
+    # print(info._links[LINK_TIBIA].angle)
     # Check angles
-    if (info.links[LINK_COXA]._angle < info.links[LINK_COXA]._min_angle or info.links[LINK_COXA]._angle > info.links[LINK_COXA]._max_angle):
+    if (info._links[LINK_COXA]._angle < info._links[LINK_COXA]._min_angle or info._links[LINK_COXA]._angle > info._links[LINK_COXA]._max_angle):
         return False
-    if (info.links[LINK_FEMUR]._angle < info.links[LINK_FEMUR]._min_angle or info.links[LINK_FEMUR]._angle > info.links[LINK_FEMUR]._max_angle):
+    if (info._links[LINK_FEMUR]._angle < info._links[LINK_FEMUR]._min_angle or info._links[LINK_FEMUR]._angle > info._links[LINK_FEMUR]._max_angle):
         return False
-    if (info.links[LINK_TIBIA].angle < info.links[LINK_TIBIA].min_angle or info.links[LINK_TIBIA].angle > info.links[LINK_TIBIA].max_angle):
+    if (info._links[LINK_TIBIA].angle < info._links[LINK_TIBIA].min_angle or info._links[LINK_TIBIA].angle > info._links[LINK_TIBIA].max_angle):
         return False
     return True
 
