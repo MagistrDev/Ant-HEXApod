@@ -88,15 +88,15 @@ def kinematic_calculate_angles(pindex):
     # Calculate FEMUR and TIBIA angle
     info._links[LINK_FEMUR]._angle = femur_zero_rotate_deg - RAD_TO_DEG(alpha) - RAD_TO_DEG(fi)
     info._links[LINK_TIBIA]._angle = RAD_TO_DEG(gamma) - tibia_zero_rotate_deg
-    # print(info._links[LINK_COXA].angle)
-    # print(info._links[LINK_FEMUR].angle)
-    # print(info._links[LINK_TIBIA].angle)
+    # print(info._links[LINK_COXA]._angle)
+    # print(info._links[LINK_FEMUR]._angle)
+    # print(info._links[LINK_TIBIA]._angle)
     # Check angles
     if (info._links[LINK_COXA]._angle < info._links[LINK_COXA]._min_angle or info._links[LINK_COXA]._angle > info._links[LINK_COXA]._max_angle):
         return False
     if (info._links[LINK_FEMUR]._angle < info._links[LINK_FEMUR]._min_angle or info._links[LINK_FEMUR]._angle > info._links[LINK_FEMUR]._max_angle):
         return False
-    if (info._links[LINK_TIBIA].angle < info._links[LINK_TIBIA].min_angle or info._links[LINK_TIBIA].angle > info._links[LINK_TIBIA].max_angle):
+    if (info._links[LINK_TIBIA]._angle < info._links[LINK_TIBIA].min_angle or info._links[LINK_TIBIA]._angle > info._links[LINK_TIBIA]._max_angle):
         return False
     return True
 
