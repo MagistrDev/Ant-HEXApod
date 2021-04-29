@@ -49,57 +49,57 @@ def set_point(index,x,y,z):
 # @return true - calculation success, false - no
 # ***************************************************************************
 def kinematic_calculate_angles(pindex):
-global planes
-info = planes[pindex]
-coxa_zero_rotate_deg = info._links[LINK_COXA]._zero_rotate
-femur_zero_rotate_deg = info._links[LINK_FEMUR]._zero_rotate
-tibia_zero_rotate_deg = info._links[LINK_TIBIA]._zero_rotate
-coxa_length = info._links[LINK_COXA]._length
-femur_length = info._links[LINK_FEMUR]._length
-tibia_length = info._links[LINK_TIBIA]._length
-x = info._position._x
-y = info._position._y
-z = info._position._z
-print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
-# Move to (X*, Y*, Z*) coordinate system - rotate
-coxa_zero_rotate_rad = DEG_TO_RAD(coxa_zero_rotate_deg)
-x1 = x * math.cos(coxa_zero_rotate_rad) + z * math.sin(coxa_zero_rotate_rad)
-y1 = y
-z1 = -x * math.sin(coxa_zero_rotate_rad) + z * math.cos(coxa_zero_rotate_rad)
-# Calculate COXA angle
-coxa_angle_rad = math.atan2(z1, x1)
-info._links[LINK_COXA]._angle = RAD_TO_DEG(coxa_angle_rad)
-# Prepare for calculation FEMUR and TIBIA angles
-# Move to (X*, Y*) coordinate system (rotate on axis Y)
-x1 = x1 * math.cos(coxa_angle_rad) + z1 * math.sin(coxa_angle_rad)
-# Move to (X**, Y**) coordinate system (remove coxa from calculations)
-x1 = x1 - coxa_length
-# Calculate angle between axis X and destination point
-fi = math.atan2(y1, x1)
-# Calculate distance to destination point
-d = math.sqrt(x1 * x1 + y1 * y1)
-if (d > femur_length + tibia_length):
-    return False # Point not attainable
-# Calculate triangle angles
-a = tibia_length
-b = femur_length
-c = d
-alpha = math.acos((b * b + c * c - a * a) / (2 * b * c))
-gamma = math.acos((a * a + b * b - c * c) / (2 * a * b))
-# Calculate FEMUR and TIBIA angle
-info._links[LINK_FEMUR]._angle = femur_zero_rotate_deg - RAD_TO_DEG(alpha) - RAD_TO_DEG(fi)
-info._links[LINK_TIBIA]._angle = RAD_TO_DEG(gamma) - tibia_zero_rotate_deg
-# print(info._links[LINK_COXA]._angle)
-# print(info._links[LINK_FEMUR]._angle)
-# print(info._links[LINK_TIBIA]._angle)
-# Check angles
-if (info._links[LINK_COXA]._angle < info._links[LINK_COXA]._min_angle or info._links[LINK_COXA]._angle > info._links[LINK_COXA]._max_angle):
-    return False
-if (info._links[LINK_FEMUR]._angle < info._links[LINK_FEMUR]._min_angle or info._links[LINK_FEMUR]._angle > info._links[LINK_FEMUR]._max_angle):
-    return False
-if (info._links[LINK_TIBIA]._angle < info._links[LINK_TIBIA]._min_angle or info._links[LINK_TIBIA]._angle > info._links[LINK_TIBIA]._max_angle):
-    return False
-return True
+    global planes
+    info = planes[pindex]
+    coxa_zero_rotate_deg = info._links[LINK_COXA]._zero_rotate
+    femur_zero_rotate_deg = info._links[LINK_FEMUR]._zero_rotate
+    tibia_zero_rotate_deg = info._links[LINK_TIBIA]._zero_rotate
+    coxa_length = info._links[LINK_COXA]._length
+    femur_length = info._links[LINK_FEMUR]._length
+    tibia_length = info._links[LINK_TIBIA]._length
+    x = info._position._x
+    y = info._position._y
+    z = info._position._z
+    print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
+    # Move to (X*, Y*, Z*) coordinate system - rotate
+    coxa_zero_rotate_rad = DEG_TO_RAD(coxa_zero_rotate_deg)
+    x1 = x * math.cos(coxa_zero_rotate_rad) + z * math.sin(coxa_zero_rotate_rad)
+    y1 = y
+    z1 = -x * math.sin(coxa_zero_rotate_rad) + z * math.cos(coxa_zero_rotate_rad)
+    # Calculate COXA angle
+    coxa_angle_rad = math.atan2(z1, x1)
+    info._links[LINK_COXA]._angle = RAD_TO_DEG(coxa_angle_rad)
+    # Prepare for calculation FEMUR and TIBIA angles
+    # Move to (X*, Y*) coordinate system (rotate on axis Y)
+    x1 = x1 * math.cos(coxa_angle_rad) + z1 * math.sin(coxa_angle_rad)
+    # Move to (X**, Y**) coordinate system (remove coxa from calculations)
+    x1 = x1 - coxa_length
+    # Calculate angle between axis X and destination point
+    fi = math.atan2(y1, x1)
+    # Calculate distance to destination point
+    d = math.sqrt(x1 * x1 + y1 * y1)
+    if (d > femur_length + tibia_length):
+        return False # Point not attainable
+    # Calculate triangle angles
+    a = tibia_length
+    b = femur_length
+    c = d
+    alpha = math.acos((b * b + c * c - a * a) / (2 * b * c))
+    gamma = math.acos((a * a + b * b - c * c) / (2 * a * b))
+    # Calculate FEMUR and TIBIA angle
+    info._links[LINK_FEMUR]._angle = femur_zero_rotate_deg - RAD_TO_DEG(alpha) - RAD_TO_DEG(fi)
+    info._links[LINK_TIBIA]._angle = RAD_TO_DEG(gamma) - tibia_zero_rotate_deg
+    # print(info._links[LINK_COXA]._angle)
+    # print(info._links[LINK_FEMUR]._angle)
+    # print(info._links[LINK_TIBIA]._angle)
+    # Check angles
+    if (info._links[LINK_COXA]._angle < info._links[LINK_COXA]._min_angle or info._links[LINK_COXA]._angle > info._links[LINK_COXA]._max_angle):
+        return False
+    if (info._links[LINK_FEMUR]._angle < info._links[LINK_FEMUR]._min_angle or info._links[LINK_FEMUR]._angle > info._links[LINK_FEMUR]._max_angle):
+        return False
+    if (info._links[LINK_TIBIA]._angle < info._links[LINK_TIBIA]._min_angle or info._links[LINK_TIBIA]._angle > info._links[LINK_TIBIA]._max_angle):
+        return False
+    return True
 
 def kca(info):
     kinematic_calculate_angles(info)
