@@ -1,7 +1,7 @@
 import initant as ant
 import plane
 import time
-import math
+from math import sin, cos, atan2, atan, pi, pow, sqrt
 ant.def_pos()
 
 def pos_arm(index, x,y,z):
