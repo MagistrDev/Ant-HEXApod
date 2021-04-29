@@ -83,8 +83,8 @@ def kinematic_calculate_angles(pindex):
     a = tibia_length
     b = femur_length
     c = d
-    alpha = math.acos( (b * b + c * c - a * a) / (2 * b * c))
-    gamma = math.acos( (a * a + b * b - c * c) / (2 * a * b))
+    alpha = math.acos(abs((b * b + c * c - a * a) / (2 * b * c)))
+    gamma = math.acos(abs( (a * a + b * b - c * c) / (2 * a * b)))
     # Calculate FEMUR and TIBIA angle
     info._links[LINK_FEMUR]._angle = femur_zero_rotate_deg - RAD_TO_DEG(alpha) - RAD_TO_DEG(fi)
     info._links[LINK_TIBIA]._angle = RAD_TO_DEG(gamma) - tibia_zero_rotate_deg
