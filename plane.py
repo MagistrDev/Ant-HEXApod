@@ -137,8 +137,8 @@ planes[1].links[LINK_TIBIA].max_angle = 180
 
 planes[2].links[LINK_COXA].length = 46.7
 planes[2].links[LINK_COXA].zero_rotate = -35.8
-planes[2].links[LINK_COXA].min_angle = -90
-planes[2].links[LINK_COXA].max_angle = 90
+planes[2].links[LINK_COXA].min_angle = 90
+planes[2].links[LINK_COXA].max_angle = -90
 
 planes[2].links[LINK_FEMUR].length = 90
 planes[2].links[LINK_FEMUR].zero_rotate = 90
