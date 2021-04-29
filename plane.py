@@ -58,7 +58,7 @@ def kinematic_calculate_angles(pindex):
     femur_length = info._links[LINK_FEMUR]._length
     tibia_length = info._links[LINK_TIBIA]._length
     x = info._position._x
-    y = info._position._z
+    y = info._position._y
     z = info._position._z
     print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
     # Move to (X*, Y*, Z*) coordinate system - rotate
