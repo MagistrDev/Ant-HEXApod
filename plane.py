@@ -108,8 +108,8 @@ def kca(info):
 
 planes[0]._links[LINK_COXA]._length = 46.7
 planes[0]._links[LINK_COXA]._zero_rotate = 35.8
-planes[0]._links[LINK_COXA]._min_angle = -90
-planes[0]._links[LINK_COXA]._max_angle = 90
+planes[0]._links[LINK_COXA]._min_angle = 90
+planes[0]._links[LINK_COXA]._max_angle = -90
 
 planes[0]._links[LINK_FEMUR]._length = 90
 planes[0]._links[LINK_FEMUR]._zero_rotate = 90
