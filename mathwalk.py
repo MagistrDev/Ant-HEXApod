@@ -50,36 +50,36 @@ def XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1):
 	ret._z = a * cos(DEG_TO_RAD(180.0 - t)) + pos0._z + a
 	return ret
 
-def step_l(index,pos0,pos1,inc=10):
-	for t in range(1,180,inc):
-		# rr = XYZ_LINAR(t, pos0, pos1)
-		rr = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
-		# print ("x-"+str(rr._x)+"\t\ty-"+str(rr._y)+"\t\tz-"+str(rr._z))
-		pos_arm(index, rr._x,rr._y,rr._z)
-	time.sleep(0.2)
+# def step_l(index,pos0,pos1,inc=10):
+# 	for t in range(1,180,inc):
+# 		# rr = XYZ_LINAR(t, pos0, pos1)
+# 		rr = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
+# 		# print ("x-"+str(rr._x)+"\t\ty-"+str(rr._y)+"\t\tz-"+str(rr._z))
+# 		pos_arm(index, rr._x,rr._y,rr._z)
+# 	time.sleep(0.2)
 
-def walk(inc = 4):
-	for t in range(1,180,inc):
-		rr = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
-		ww = XZ_ELLIPTICAL_Y_SINUS(t, pos2, pos3)
-		pos_arm(0, rr._x,rr._y,-rr._z)
-		pos_arm(3, rr._x,rr._y,rr._z)
-		pos_arm(2, rr._x,rr._y,-rr._z)
-		pos_arm(5, rr._x,rr._y,rr._z)
-	for t in range(1,180,inc):
-		rr = XYZ_LINAR(t, pos_sub, pos0)
-		ww = XYZ_LINAR(t, pos_sub2, pos2)
-		pos_arm(0, rr._x,rr._y - 30, -rr._z)
-		pos_arm(3, rr._x,rr._y - 30,rr._z)
-		pos_arm(2, ww._x,ww._y,-ww._z)
-		pos_arm(5, ww._x,ww._y,ww._z)
+# def walk(inc = 4):
+# 	for t in range(1,180,inc):
+# 		rr = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
+# 		ww = XZ_ELLIPTICAL_Y_SINUS(t, pos2, pos3)
+# 		pos_arm(0, rr._x,rr._y,-rr._z)
+# 		pos_arm(3, rr._x,rr._y,rr._z)
+# 		pos_arm(2, rr._x,rr._y,-rr._z)
+# 		pos_arm(5, rr._x,rr._y,rr._z)
+# 	for t in range(1,180,inc):
+# 		rr = XYZ_LINAR(t, pos_sub, pos0)
+# 		ww = XYZ_LINAR(t, pos_sub2, pos2)
+# 		pos_arm(0, rr._x,rr._y - 30, -rr._z)
+# 		pos_arm(3, rr._x,rr._y - 30,rr._z)
+# 		pos_arm(2, ww._x,ww._y,-ww._z)
+# 		pos_arm(5, ww._x,ww._y,ww._z)
 
-pos0 = plane.point_3d_t(150,-25,-10)
-pos1 = plane.point_3d_t(150,-25,80)
-pos2 = plane.point_3d_t(150,-40,-60)
-pos3 = plane.point_3d_t(150,10,80)
-pos_sub = plane.point_3d_t(150,-25,120)
-pos_sub2 = plane.point_3d_t(150,-40,80)
+# pos0 = plane.point_3d_t(150,-25,-10)
+# pos1 = plane.point_3d_t(150,-25,80)
+# pos2 = plane.point_3d_t(150,-40,-60)
+# pos3 = plane.point_3d_t(150,10,80)
+# pos_sub = plane.point_3d_t(150,-25,120)
+# pos_sub2 = plane.point_3d_t(150,-40,80)
 
 0 2 4 фаза подъема
 1 3 5 фаза перемещения
@@ -91,13 +91,13 @@ pos0_f = plane.point_3d_t(120,-70,10)
 pos1_f = plane.point_3d_t(120,-70,70)
 pose_f = plane.point_3d_t(120, 10,70)
 
-pos0_m = plane.point_3d_t(120,-70,-30)
-pos1_m = plane.point_3d_t(120,-70,30)
-pose_m = plane.point_3d_t(120, 10,30)
+pos0_m = plane.point_3d_t(120,-70,-40)
+pos1_m = plane.point_3d_t(120,-70,20)
+pose_m = plane.point_3d_t(120, 10,20)
 
-pos0_b = plane.point_3d_t(120,-70,120)
-pos1_b = plane.point_3d_t(120,-70,40)
-pose_b = plane.point_3d_t(120, 10,40)
+pos0_b = plane.point_3d_t(120,-70,-150)
+pos1_b = plane.point_3d_t(120,-70,-90)
+pose_b = plane.point_3d_t(120, 10,-90)
 
 подъем
 st1_se = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
@@ -105,21 +105,35 @@ st1_se = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
 перемещение 
 st1_m =  XYZ_LINAR(t, pos_sub, pos0)
 
+def phathe1():
+	for t in range(1,180,inc):
+		ph1_f = XZ_ELLIPTICAL_Y_SINUS(t, pos0_f, pose_f)
+		ph1_m = XZ_ELLIPTICAL_Y_SINUS(t, pos0_m, pose_m)
+		ph1_b = XZ_ELLIPTICAL_Y_SINUS(t, pos0_b, pose_b)
+		ph2_f = XYZ_LINAR(t, pos1_f, pos0_f)
+		ph2_m = XYZ_LINAR(t, pos1_m, pos0_m)
+		ph2_b = XYZ_LINAR(t, pos1_b, pos0_b)
+		pos_arm(0, ph1_f._x,ph1_f._y, ph1_f._z)
+		pos_arm(4, ph1_m._x,ph1_m._y, ph1_m._z)
+		pos_arm(2, ph1_b._x,ph1_b._y, ph1_b._z)
+		pos_arm(3, ph2_f._x,ph2_f._y, ph2_f._z)
+		pos_arm(1, ph2_m._x,ph2_m._y, ph2_m._z)
+		pos_arm(5, ph2_b._x,ph2_b._y, ph2_b._z)
 
-for t in range(1,180,inc):
-	ph1_f = XZ_ELLIPTICAL_Y_SINUS(t, pos0_f, pose_f)
-	ph1_m = XZ_ELLIPTICAL_Y_SINUS(t, pos0_m, pose_m)
-	ph1_b = XZ_ELLIPTICAL_Y_SINUS(t, pos0_b, pose_b)
-	ph2_f = XYZ_LINAR(t, pos1_f, pos0_f)
-	ph2_m = XYZ_LINAR(t, pos1_m, pos0_m)
-	ph2_b = XYZ_LINAR(t, pos1_b, pos0_b)
-	pos_arm(0, ph1_f._x,ph1_f._y, -ph1_f._z)
-	# pos_arm(4, ph1_m._x,ph1_m._y, ph1_m._z)
-	# pos_arm(2, ph1_b._x,ph1_b._y, ph1_b._z)
-	# pos_arm(3, ph2_f._x,ph2_f._y, ph2_f._z)
-	pos_arm(1, ph2_m._x,ph2_m._y, -ph2_m._z)
-	# pos_arm(5, ph2_b._x,ph2_b._y, -ph2_b._z)
-	
+def phathe2():
+	for t in range(1,180,inc):
+		ph1_f = XZ_ELLIPTICAL_Y_SINUS(t, pos0_f, pose_f)
+		ph1_m = XZ_ELLIPTICAL_Y_SINUS(t, pos0_m, pose_m)
+		ph1_b = XZ_ELLIPTICAL_Y_SINUS(t, pos0_b, pose_b)
+		ph2_f = XYZ_LINAR(t, pos1_f, pos0_f)
+		ph2_m = XYZ_LINAR(t, pos1_m, pos0_m)
+		ph2_b = XYZ_LINAR(t, pos1_b, pos0_b)
+		pos_arm(3, ph1_f._x,ph1_f._y, ph1_f._z)
+		pos_arm(1, ph1_m._x,ph1_m._y, ph1_m._z)
+		pos_arm(5, ph1_b._x,ph1_b._y, ph1_b._z)
+		pos_arm(0, ph2_f._x,ph2_f._y, ph2_f._z)
+		pos_arm(4, ph2_m._x,ph2_m._y, ph2_m._z)
+		pos_arm(2, ph2_b._x,ph2_b._y, ph2_b._z)
 
 for t in range(1,180,inc):
 	ph1_m = XZ_ELLIPTICAL_Y_SINUS(t, pos0_m, pose_m)
