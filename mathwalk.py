@@ -50,7 +50,13 @@ def XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1):
 	ret._z = a * cos(DEG_TO_RAD(180.0 - t)) + pos0._z + a
 	return ret
 
-for t in range(181):
-	# rr = XYZ_LINAR(t, pos0, pos1)
-	rr = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
-	print ("x-"+str(rr._x)+"\t\ty-"+str(rr._y)+"\t\tz-"+str(rr._z))
+def step_l(index):
+	for t in range(181):
+		# rr = XYZ_LINAR(t, pos0, pos1)
+		rr = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
+		# print ("x-"+str(rr._x)+"\t\ty-"+str(rr._y)+"\t\tz-"+str(rr._z))
+		pos_arm(index, rr._x,rr._y,rr._z)
+	time.sleep(0.2)
+
+pos0 = plane.point_3d_t(150,-25,-20)
+pos1 = plane.point_3d_t(150,10,120)

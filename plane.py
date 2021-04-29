@@ -1,5 +1,5 @@
 import math
-
+import initant as ant
 LINK_COXA = 0
 LINK_FEMUR = 1
 LINK_TIBIA = 2
@@ -43,6 +43,13 @@ def set_point(index,x,y,z):
     obj._position._y = y
     obj._position._z = z
 
+def pos_arm(index, x,y,z):
+    set_point(index, x, y ,z)
+    kinematic_calculate_angles(index)
+    pl = planes[index]
+    # print(str(pl._links[0]._angle) + " / " + str(pl._links[1]._angle) + " / " + str(pl._links[2]._angle))
+    ant.set_arm_ang(index,pl._links[0]._angle, pl._links[1]._angle, pl._links[2]._angle)
+
 # ***************************************************************************
 # @brief  Calculate angles
 # @param  info: limb info @ref limb_info_t
@@ -60,7 +67,7 @@ def kinematic_calculate_angles(pindex):
     x = info._position._x
     y = info._position._y
     z = info._position._z
-    print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
+    # print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
     # Move to (X*, Y*, Z*) coordinate system - rotate
     coxa_zero_rotate_rad = DEG_TO_RAD(coxa_zero_rotate_deg)
     x1 = x * math.cos(coxa_zero_rotate_rad) + z * math.sin(coxa_zero_rotate_rad)
