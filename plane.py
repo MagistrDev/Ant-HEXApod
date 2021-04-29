@@ -6,23 +6,23 @@ LINK_TIBIA = 2
 
 class LinkInfo:
     #  Current link state
-    self.angle = 0.0
+    angle = 0.0
     #  Link configuration
-    self.length = 0
-    self.zero_rotate = 0
-    self.min_angle = 0
-    self.max_angle = 0
+    length = 0
+    zero_rotate = 0
+    min_angle = 0
+    max_angle = 0
 
 class point_3d_t:
-    self.x = 0.0
-    self.y = 0.0
-    self.z = 0.0
+    x = 0.0
+    y = 0.0
+    z = 0.0
 
 class LimbInfo:
-    self.position = point_3d_t()
+    position = point_3d_t()
     # path_3d_t  movement_path
     # link_info_t links[3]
-    self.links = [LinkInfo(),LinkInfo(),LinkInfo()]
+    links = [LinkInfo(),LinkInfo(),LinkInfo()]
 
 planes = [LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo()]
 
