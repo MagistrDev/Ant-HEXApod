@@ -38,6 +38,7 @@ arms = [[l1_sh, l1_fore, l1_wr],[l2_sh, l2_fore, l2_wr],[l3_sh, l3_fore, l3_wr],
 def set_arm_ang(index, sh, fore, wr):
 	if index < 3:
 		sh = -sh
+	print(sh)
 	angle_sh = 90 - sh
 	arms[index][0].set_angle(angle_sh)
 	arms[index][1].set_angle(fore)
