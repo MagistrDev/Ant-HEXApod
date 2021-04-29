@@ -4,25 +4,28 @@ LINK_COXA = 0
 LINK_FEMUR = 1
 LINK_TIBIA = 2
 
-class LinkInfo:
-    #  Current link state
-    angle = 0.0
-    #  Link configuration
-    length = 0
-    zero_rotate = 0
-    min_angle = 0
-    max_angle = 0
+class LinkInfo(object):
+    def __init__(self):
+        #  Current link state
+        angle = 0.0
+        #  Link configuration
+        length = 0
+        zero_rotate = 0
+        min_angle = 0
+        max_angle = 0
 
-class point_3d_t:
-    x = 0.0
-    y = 0.0
-    z = 0.0
+class point_3d_t(object):
+    def __init__(self):
+        x = 0.0
+        y = 0.0
+        z = 0.0
 
-class LimbInfo:
-    position = point_3d_t()
-    # path_3d_t  movement_path
-    # link_info_t links[3]
-    links = [LinkInfo(),LinkInfo(),LinkInfo()]
+class LimbInfo(object):
+    def __init__(self):
+        position = point_3d_t()
+        # path_3d_t  movement_path
+        # link_info_t links[3]
+        links = [LinkInfo(),LinkInfo(),LinkInfo()]
 
 planes = [LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo()]
 
@@ -47,7 +50,6 @@ def set_point(index,x,y,z):
 def kinematic_calculate_angles(pindex):
     global planes
     info = planes[pindex]
-    print(info.links[0].length)
     coxa_zero_rotate_deg = info.links[LINK_COXA].zero_rotate
     femur_zero_rotate_deg = info.links[LINK_FEMUR].zero_rotate
     tibia_zero_rotate_deg = info.links[LINK_TIBIA].zero_rotate
@@ -200,5 +202,4 @@ planes[5].links[LINK_TIBIA].length = 122.558
 planes[5].links[LINK_TIBIA].zero_rotate = 16.7
 planes[5].links[LINK_TIBIA].min_angle = 0
 planes[5].links[LINK_TIBIA].max_angle = 180
-print("hello")
 
