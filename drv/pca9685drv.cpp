@@ -1,7 +1,8 @@
 #include "pca9685drv.h"
 
-#include <linux/module.h>
-#include <linux/init.h>
+int init() {
+    return 1;
+}
 
 int main(void) {
   int fd = open("/dev/i2c-1", O_RDWR | O_NONBLOCK);
@@ -27,15 +28,6 @@ int main(void) {
     printf("%i\n",buffer[0]);
     usleep(500000);
   }
-
-//   status = read(fd, buffer, 1);
-//   if (status == -1) {
-//     printf("Failed to read from register 0x0C.\n");
-//     return 4;
-//   }
-
-//   printf("WHO_AM_I = 0x%X\n", (int)buffer[0]);
-
   close(fd);
 }
 
