@@ -87,17 +87,22 @@ def XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1):
 1 3 5 фаза подъема
 2 4 0 фаза перемещения
 
-pos0_f = plane.point_3d_t(120,-70,10)
-pos1_f = plane.point_3d_t(120,-70,70)
-pose_f = plane.point_3d_t(120, 10,70)
+pos0_f = plane.point_3d_t(90,-120,30)
+pos1_f = plane.point_3d_t(90,-120,100)
+pose_f = plane.point_3d_t(90, 10,100)
 
-pos0_m = plane.point_3d_t(120,-70,-40)
-pos1_m = plane.point_3d_t(120,-70,20)
-pose_m = plane.point_3d_t(120, 10,20)
+pos0_m = plane.point_3d_t(90,-120,-40)
+pos1_m = plane.point_3d_t(90,-120,20)
+pose_m = plane.point_3d_t(90, 10,20)
 
-pos0_b = plane.point_3d_t(120,-70,-150)
-pos1_b = plane.point_3d_t(120,-70,-90)
-pose_b = plane.point_3d_t(120, 10,-90)
+pos0_b = plane.point_3d_t(90,-120,-150)
+pos1_b = plane.point_3d_t(90,-120,-90)
+pose_b = plane.point_3d_t(90, 10,-90)
+
+def walk_up():
+	while 1:
+		phathe1()
+		phathe2()
 
 подъем
 st1_se = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
