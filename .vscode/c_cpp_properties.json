@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "D:\\z-wave\\my_lib\\Z-Uno2G\\hardware\\cores\\**",
+                "D:\\z-wave\\my_lib\\Z-Uno2G\\hardware\\libraries\\**",
+                "D:\\z-wave\\my_lib\\Z-Uno2G\\tools\\gcc\\lib\\gcc\\arm-none-eabi\\7.2.1\\include\\**",
+                "D:\\z-wave\\my_lib\\Z-Uno2G\\tools\\libclang\\**"
+            ],
+            "forcedInclude": [
+                "D:\\z-wave\\my_lib\\Z-Uno2G\\hardware\\cores\\includes\\Arduino.h"
+            ],
+            "intelliSenseMode": "gcc-arm",
+            "compilerPath": "D:\\z-wave\\my_lib\\Z-Uno2G\\tools\\gcc\\bin\\arm-none-eabi-gcc.exe"
+        }
+    ],
+    "version": 4
+}
