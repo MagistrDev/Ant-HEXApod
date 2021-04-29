@@ -36,7 +36,8 @@ r3_sh = ServoPCA9685.ServoPCA9685(r_pca9685,PCA9685.CHANNEL01)
 arms = [[l1_sh, l1_fore, l1_wr],[l2_sh, l2_fore, l2_wr],[l3_sh, l3_fore, l3_wr],[r1_sh, r1_fore, r1_wr],[r2_sh, r2_fore, r2_wr],[r3_sh, r3_fore, r3_wr]]
 
 def set_arm_ang(index, sh, fore, wr):
-	sh = -sh if index < 3 else sh
+	if index < 3:
+		sh = -sh
 	angle_sh = 90 - sh
 	arms[index][0].set_angle(angle_sh)
 	arms[index][1].set_angle(fore)
