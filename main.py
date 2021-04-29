@@ -8,7 +8,7 @@ def pos_arm(index, x,y,z):
     plane.set_point(index, x, y ,z)
     plane.kinematic_calculate_angles(index)
     pl = plane.planes[index]
-    print(pl._links[0])
+    print(str(pl._links[0]._angle) + " / " + str(pl._links[1]._angle) + " / " + str(pl._links[2]._angle))
     ant.set_arm_ang(index,pl._links[0]._angle, pl._links[1]._angle, pl._links[2]._angle)
 
 
