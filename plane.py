@@ -40,7 +40,7 @@ def set_point(index,x,y,z):
     global planes
     obj = planes[index]
     obj._position._x = x
-    obj._position._z = y
+    obj._position._y = y
     obj._position._z = z
 
 # ***************************************************************************
@@ -106,7 +106,7 @@ def kca(info):
 
 
 planes[0]._links[LINK_COXA]._length = 46.7
-planes[0]._links[LINK_COXA]._zero_rotate = -35.8
+planes[0]._links[LINK_COXA]._zero_rotate = 35.8
 planes[0]._links[LINK_COXA]._min_angle = -90
 planes[0]._links[LINK_COXA]._max_angle = 90
 
@@ -139,7 +139,7 @@ planes[1]._links[LINK_TIBIA]._max_angle = 180
 
 
 planes[2]._links[LINK_COXA]._length = 46.7
-planes[2]._links[LINK_COXA]._zero_rotate = 35.8
+planes[2]._links[LINK_COXA]._zero_rotate = -35.8
 planes[2]._links[LINK_COXA]._min_angle = 90
 planes[2]._links[LINK_COXA]._max_angle = -90
 
