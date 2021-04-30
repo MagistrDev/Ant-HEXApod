@@ -63,10 +63,14 @@ def walk(inc = 4):
 		rr = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
 		pos_arm(0, rr._x,rr._y,-rr._z)
 		pos_arm(3, rr._x,rr._y,rr._z)
+		pos_arm(2, rr._x,rr._y,-rr._z)
+		pos_arm(5, rr._x,rr._y,rr._z)
 	for t in range(1,180,inc):
 		rr = XYZ_LINAR(t, pos_sub, pos0)
 		pos_arm(0, rr._x,rr._y - 30, -rr._z)
 		pos_arm(3, rr._x,rr._y - 30,rr._z)
+		pos_arm(2, rr._x,rr._y - 30, -rr._z)
+		pos_arm(5, rr._x,rr._y - 30,rr._z)
 
 pos0 = plane.point_3d_t(150,-25,-20)
 pos1 = plane.point_3d_t(150,10,120)
