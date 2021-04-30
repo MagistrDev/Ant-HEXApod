@@ -21,7 +21,7 @@ class ServoPCA9685(object):
  
     def set_pwm_freq(self, freq=400):
         self.pca9685.set_pwm_freq(freq)
-        time.sleep(0.005)
+        time.sleep(0.001)
  
     def set_angle(self, angle):
         self.set_pulse(map(angle, 0, self.angel_max, self.servo_min, self.servo_max))
