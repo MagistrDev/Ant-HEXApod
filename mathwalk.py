@@ -62,6 +62,7 @@ pos0_b = plane.point_3d_t(90,-120,-150)
 pos1_b = plane.point_3d_t(90,-120,-90)
 pose_b = plane.point_3d_t(90, 10,-90)
 
+inc = 5
 def walk_up():
 	while 1:
 		phathe1()
@@ -75,19 +76,6 @@ def walk_up():
 
 def phathe1():
 	for t in range(1,180,inc):
-<<<<<<< HEAD
-		rr = XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1)
-		pos_arm(0, rr._x,rr._y,-rr._z)
-		pos_arm(3, rr._x,rr._y,rr._z)
-		pos_arm(2, rr._x,rr._y,-rr._z)
-		pos_arm(5, rr._x,rr._y,rr._z)
-	for t in range(1,180,inc):
-		rr = XYZ_LINAR(t, pos_sub, pos0)
-		pos_arm(0, rr._x,rr._y - 30, -rr._z)
-		pos_arm(3, rr._x,rr._y - 30,rr._z)
-		pos_arm(2, rr._x,rr._y - 30, -rr._z)
-		pos_arm(5, rr._x,rr._y - 30,rr._z)
-=======
 		ph1_f = XZ_ELLIPTICAL_Y_SINUS(t, pos0_f, pose_f)
 		ph1_m = XZ_ELLIPTICAL_Y_SINUS(t, pos0_m, pose_m)
 		ph1_b = XZ_ELLIPTICAL_Y_SINUS(t, pos0_b, pose_b)
@@ -129,6 +117,5 @@ def set_default_pos():
 	pos_arm(3, 150, -80, 80)
 	pos_arm(4, 150, -80, 0)
 	pos_arm(5, 150, -80, -80)
->>>>>>> 59048a37881a056a45efa7a378e9bdd1bc7965a5
 
 # set_default_pos()
