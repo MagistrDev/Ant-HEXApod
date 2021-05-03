@@ -29,7 +29,7 @@ class ServoPCA9685(object):
     def set_pulse(self, pulse):
         # if pulse >= self.servo_min and pulse <= self.servo_max:
         self.pca9685.set_pwm(self.channel, 0, pulse)
-        time.sleep(0.005)
+        # time.sleep(0.005)
  
     def servomin(self):
         return self.servo_min
