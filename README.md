@@ -1,7 +1,7 @@
 # Ant-HEXApod
 development of a hexapod from scratch
 
-web-site on hexapod https://shaggier-beaver-1025.dataplicity.io/
+web-site on hexapod https://morainal-gnu-3167.dataplicity.io
 
 Задачи
 
@@ -13,5 +13,4 @@ web-site on hexapod https://shaggier-beaver-1025.dataplicity.io/
     предусмотреть возможность дополнения и крепления под разные модули
 
 Программно
-    1. драйвер приводов:
-        реал
+    https://lucid.app/documents/view/d4fb20d5-ff08-432e-a867-de19ff57e8eb
