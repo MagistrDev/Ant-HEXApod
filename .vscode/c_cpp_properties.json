@@ -1,18 +1,18 @@
 {
     "configurations": [
         {
-            "name": "Win32",
+            "name": "Mac",
             "includePath": [
-                "D:\\z-wave\\my_lib\\Z-Uno2G\\hardware\\cores\\**",
-                "D:\\z-wave\\my_lib\\Z-Uno2G\\hardware\\libraries\\**",
-                "D:\\z-wave\\my_lib\\Z-Uno2G\\tools\\gcc\\lib\\gcc\\arm-none-eabi\\7.2.1\\include\\**",
-                "D:\\z-wave\\my_lib\\Z-Uno2G\\tools\\libclang\\**"
+                "${workspaceFolder}/**"
             ],
-            "forcedInclude": [
-                "D:\\z-wave\\my_lib\\Z-Uno2G\\hardware\\cores\\includes\\Arduino.h"
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"
             ],
-            "intelliSenseMode": "gcc-arm",
-            "compilerPath": "D:\\z-wave\\my_lib\\Z-Uno2G\\tools\\gcc\\bin\\arm-none-eabi-gcc.exe"
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++98",
+            "intelliSenseMode": "macos-clang-x64"
         }
     ],
     "version": 4

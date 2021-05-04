@@ -3,6 +3,11 @@ development of a hexapod from scratch
 
 web-site on hexapod https://morainal-gnu-3167.dataplicity.io
 
+Постоянный доступ к терминалу устройства через через сервис https://www.dataplicity.com/
+Логин /пароль разосланы в личку -> заходим в Devices и вводим
+su pi
+на вопрос password вводим raspberry
+
 Задачи
 
 Физическая часть
@@ -12,5 +17,5 @@ web-site on hexapod https://morainal-gnu-3167.dataplicity.io
     предусмотреть свободное перемещение конечностей бота без зацепа друг за друга,
     предусмотреть возможность дополнения и крепления под разные модули
 
-Программно
+Программные задачи проекта
     https://lucid.app/documents/view/d4fb20d5-ff08-432e-a867-de19ff57e8eb
