@@ -41,6 +41,13 @@
 
 # Бонусная часть
 
+
+### Solar System Exploration, 1950s – 1960s
+
+Function | MySQL / MariaDB | PostgreSQL | SQLite
+:------------ | :-------------| :-------------| :-------------
+substr | :heavy_check_mark: |  :white_check_mark: | :heavy_check_mark:
+
 <details>
 <summary>Просто чтобы не потерять</summary>
 Ant-HEXApod
