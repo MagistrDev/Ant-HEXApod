@@ -102,8 +102,36 @@ def process_advanced_trajectory(motion_time: float) -> bool:
 		# 	position_y = MotionConfig.start_position[i].y
 		if MotionConfig.trajectories[i] == TRAJECTORY_XZ_ADV_Y_SINUS:
 			position_y += LIMB_STEP_HEIGHT * math.sin(relative_motion_time * math.pi)
-		limbs_list.append(LimbsList(position_x, position_y, position_z))
+		# limbs_list.append(LimbsList(position_x, position_y, position_z))
+		limbs_list[i].position.x = position_x
+		limbs_list[i].position.y = position_y
+		limbs_list[i].position.z = position_z
 	return True
 
+def	init_hexapod():
+	CurrentTrajectoryConfig.curvature = 1.5
+	CurrentTrajectoryConfig.distance = 20
+	# стартовые позиции, надо подобрать
+	MotionConfig.start_position = [Vector(20, 0, -20), Vector(0, 0, 0), Vector(0, 0, 0),
+									Vector(0, 0, 0), Vector(0, 0, 0), Vector(0, 0, 0)]
+	# Одно из них направление движения. другое по воздуху или по земле
+	MotionConfig.time_directions = [0, 1, 0,
+									1, 0, 1]
+	MotionConfig.trajectories = [1, 0, 1,
+								0, 1, 0]
+	global limbs_list
+	for element in MotionConfig.start_position:
+		limbs_list.append(LimbsList(element.x, element.y, element.z))
 
-process_advanced_trajectory(1.0)
+init_hexapod()
+for i in range(5):
+	process_advanced_trajectory(0.7)
+	print(f"--------{i}----------")
+	for j, element in zip(range(6), limbs_list):
+		print(element.position.x, element.position.y, element.position.z)
+		MotionConfig.start_position[j].x = element.position.x
+		MotionConfig.start_position[j].y = element.position.y
+		MotionConfig.start_position[j].z = element.position.z
+	print("---------------------")
+
+# process_advanced_trajectory(1.0)
