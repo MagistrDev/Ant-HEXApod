@@ -231,7 +231,7 @@ def	init_hexapod():
 
 init_hexapod()
 for i in range(5):
-	new_movments.process_advanced_trajectory(0.7)
+	new_movments.process_advanced_trajectory(0.5)
 	print(f"--------{i}----------")
 	for j, element in zip(range(6), new_movments.limbs_list):
 		print(element.position.x, element.position.y, element.position.z)
