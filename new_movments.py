@@ -133,28 +133,16 @@ def change_direction():
 	for element in MotionConfig.time_directions:
 		element = element ^ 1
 
-init_hexapod()
+# init_hexapod()
 
-for x in range(10):
-	change_direction()
-	for i in range(11):
-		move(i / 10)
-		print("----------------------")
-		for j in range(6):
-			print(limbs_list[j].position.x, limbs_list[j].position.y, limbs_list[j].position.z)
-		print("-----------------------")
-		# print(limbs_list[0].position.x, limbs_list[0].position.y, limbs_list[0].position.z)
-		time.sleep(0.5)
-	print("********************")
-
-# for i in range(5):
-# 	process_advanced_trajectory(0.7)
-# 	print(f"--------{i}----------")
-# 	for j, element in zip(range(6), limbs_list):
-# 		print(element.position.x, element.position.y, element.position.z)
-# 		MotionConfig.start_position[j].x = element.position.x
-# 		MotionConfig.start_position[j].y = element.position.y
-# 		MotionConfig.start_position[j].z = element.position.z
-	# print("---------------------")
-
-# process_advanced_trajectory(1.0)
+# for x in range(10):
+# 	change_direction()
+# 	for i in range(11):
+# 		move(i / 10)
+# 		print("----------------------")
+# 		for j in range(6):
+# 			print(limbs_list[j].position.x, limbs_list[j].position.y, limbs_list[j].position.z)
+# 		print("-----------------------")
+# 		# print(limbs_list[0].position.x, limbs_list[0].position.y, limbs_list[0].position.z)
+# 		time.sleep(0.5)
+# 	print("********************")
