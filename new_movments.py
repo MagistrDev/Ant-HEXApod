@@ -15,6 +15,8 @@ TRAJECTORY_XZ_ADV_Y_SINUS = 1
 # Высота шага константа меняй через нее
 LIMB_STEP_HEIGHT = 10
 
+direct_tmp = [1, 0, 1, 0, 1, 0]
+
 class CurrentTrajectoryConfig:
 	curvature: float = 0
 	distance: float = 0
@@ -139,8 +141,8 @@ def move(step: float):
 
 # Сменить направление движения на противоположное
 def change_direction():
-	for element in MotionConfig.time_directions:
-		element = element ^ 1
+	global direct_tmp
+	direct_tmp, MotionConfig.time_directions = MotionConfig.time_directions, direct_tmp
 
 # Сменить все стартовые позиции
 def change_all_start_position():
@@ -163,6 +165,9 @@ def change_trajectory_config():
 	CurrentTrajectoryConfig.distance = int(input("write distance\n"))
 
 # init_hexapod()
+# change_direction()
+# for element in MotionConfig.time_directions:
+# 	print(element)
 # change_start_position()
 
 # for x in range(10):
