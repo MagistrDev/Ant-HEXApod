@@ -124,22 +124,28 @@ def	init_hexapod():
 	for element in MotionConfig.start_position:
 		limbs_list.append(LimbsList(element.x, element.y, element.z))
 
-def move_forward(step: float):
+def move(step: float):
 	process_advanced_trajectory(step)
 	if step == 1.0:
 		MotionConfig.time_directions, MotionConfig.trajectories = MotionConfig.trajectories, MotionConfig.time_directions
 
+def change_direction():
+	for element in MotionConfig.time_directions:
+		element = element ^ 1
+
 init_hexapod()
 
 for x in range(10):
+	change_direction()
 	for i in range(11):
-		move_forward(i / 10)
-		# print("----------------------")
-		# for j in range(6):
-		# 	print(limbs_list[j].position.x, limbs_list[j].position.y, limbs_list[j].position.z)
-		# print("-----------------------")
-		print(limbs_list[0].position.x, limbs_list[0].position.y, limbs_list[0].position.z)
+		move(i / 10)
+		print("----------------------")
+		for j in range(6):
+			print(limbs_list[j].position.x, limbs_list[j].position.y, limbs_list[j].position.z)
+		print("-----------------------")
+		# print(limbs_list[0].position.x, limbs_list[0].position.y, limbs_list[0].position.z)
 		time.sleep(0.5)
+	print("********************")
 
 # for i in range(5):
 # 	process_advanced_trajectory(0.7)
