@@ -1,11 +1,18 @@
 import math
 import time
 
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
+# Пока так, потом буду функции приводить к юзер френдли, если понадобится #
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
+
 # Don't know from where it is
 SUPPORT_LIMBS_COUNT = 6
 TIME_DIR_REVERSE = 1
 TRAJECTORY_XZ_ADV_Y_CONST = 0
 TRAJECTORY_XZ_ADV_Y_SINUS = 1
+# Высота шага константа меняй через нее
 LIMB_STEP_HEIGHT = 10
 
 class CurrentTrajectoryConfig:
@@ -124,16 +131,39 @@ def	init_hexapod():
 	for element in MotionConfig.start_position:
 		limbs_list.append(LimbsList(element.x, element.y, element.z))
 
+# Движение на шаг, использовать в цикле
 def move(step: float):
 	process_advanced_trajectory(step)
 	if step == 1.0:
 		MotionConfig.time_directions, MotionConfig.trajectories = MotionConfig.trajectories, MotionConfig.time_directions
 
+# Сменить направление движения на противоположное
 def change_direction():
 	for element in MotionConfig.time_directions:
 		element = element ^ 1
 
+# Сменить все стартовые позиции
+def change_all_start_position():
+	for i, element in zip(range(6), MotionConfig.start_position):
+		xyz = input(f"write xyz for {i} leg\n").split(' ')
+		element.x = int(xyz[0])
+		element.y = int(xyz[1])
+		element.z = int(xyz[2])
+
+# Сменить одну выбранную стартовую позицию для определенной ноги
+def change_one_start_position(num: int):
+	xyz = input(f"write xyz\n").split(' ')
+	MotionConfig.start_position[num].x = int(xyz[0])
+	MotionConfig.start_position[num].y = int(xyz[1])
+	MotionConfig.start_position[num].z = int(xyz[2])
+
+# Сменить значения поворота и шага
+def change_trajectory_config():
+	CurrentTrajectoryConfig.curvature = int(input("write curvature\n"))
+	CurrentTrajectoryConfig.distance = int(input("write distance\n"))
+
 # init_hexapod()
+# change_start_position()
 
 # for x in range(10):
 # 	change_direction()
