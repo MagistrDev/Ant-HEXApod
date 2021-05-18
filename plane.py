@@ -214,31 +214,31 @@ planes[5]._links[LINK_TIBIA]._min_angle = 0
 planes[5]._links[LINK_TIBIA]._max_angle = 180
 
 
-def	init_hexapod():
-	new_movments.CurrentTrajectoryConfig.curvature = 1.5
-	new_movments.CurrentTrajectoryConfig.distance = 20
-	# стартовые позиции, надо подобрать
-	new_movments.MotionConfig.start_position = [new_movments.Vector(20, 0, -20),new_movments. Vector(0, 0, 0), new_movments.Vector(0, 0, 0),
-									new_movments.Vector(0, 0, 0), new_movments.Vector(0, 0, 0), new_movments.Vector(0, 0, 0)]
-	# Одно из них направление движения. другое по воздуху или по земле
-	new_movments.MotionConfig.time_directions = [0, 1, 0,
-									1, 0, 1]
-	new_movments.MotionConfig.trajectories = [1, 0, 1,
-								0, 1, 0]
-	global limbs_list
-	for element in new_movments.MotionConfig.start_position:
-		new_movments.limbs_list.append(new_movments.LimbsList(element.x, element.y, element.z))
+# def	init_hexapod():
+# 	new_movments.CurrentTrajectoryConfig.curvature = 1.5
+# 	new_movments.CurrentTrajectoryConfig.distance = 20
+# 	# стартовые позиции, надо подобрать
+# 	new_movments.MotionConfig.start_position = [new_movments.Vector(20, 0, -20),new_movments. Vector(0, 0, 0), new_movments.Vector(0, 0, 0),
+# 									new_movments.Vector(0, 0, 0), new_movments.Vector(0, 0, 0), new_movments.Vector(0, 0, 0)]
+# 	# Одно из них направление движения. другое по воздуху или по земле
+# 	new_movments.MotionConfig.time_directions = [0, 1, 0,
+# 									1, 0, 1]
+# 	new_movments.MotionConfig.trajectories = [1, 0, 1,
+# 								0, 1, 0]
+# 	global limbs_list
+# 	for element in new_movments.MotionConfig.start_position:
+# 		new_movments.limbs_list.append(new_movments.LimbsList(element.x, element.y, element.z))
 
-init_hexapod()
-for i in range(5):
-	new_movments.process_advanced_trajectory(0.5)
-	print(f"--------{i}----------")
-	for j, element in zip(range(6), new_movments.limbs_list):
-		print(element.position.x, element.position.y, element.position.z)
-		new_movments.MotionConfig.start_position[j].x = element.position.x
-		new_movments.MotionConfig.start_position[j].y = element.position.y
-		new_movments.MotionConfig.start_position[j].z = element.position.z
-	print("---------------------")
+# init_hexapod()
+# for i in range(5):
+# 	new_movments.process_advanced_trajectory(0.5)
+# 	print(f"--------{i}----------")
+# 	for j, element in zip(range(6), new_movments.limbs_list):
+# 		print(element.position.x, element.position.y, element.position.z)
+# 		new_movments.MotionConfig.start_position[j].x = element.position.x
+# 		new_movments.MotionConfig.start_position[j].y = element.position.y
+# 		new_movments.MotionConfig.start_position[j].z = element.position.z
+# 	print("---------------------")
 
 planes[0]._position = new_movments.limbs_list[0].position
 planes[1]._position = new_movments.limbs_list[1].position
