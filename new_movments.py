@@ -181,3 +181,31 @@ def change_trajectory_config():
 # 		# print(limbs_list[0].position.x, limbs_list[0].position.y, limbs_list[0].position.z)
 # 		time.sleep(0.5)
 # 	print("********************")
+
+
+# def cycle():
+# 	new_movments.change_trajectory_config()
+# 	while 1:
+# 		for step in range(11):
+# 			new_movments.move(step / 10)
+# 			for i in range(6):
+# 				plane.pos_arm(i, new_movments.limbs_list[i].position.x, new_movments.limbs_list[i].position.y, new_movments.limbs_list[i].position.z)
+# 			x1 = int(new_movments.limbs_list[0].position.x)
+# 			y1 = int(new_movments.limbs_list[0].position.y)
+# 			z1 = int(new_movments.limbs_list[0].position.z)
+# 			x2 = int(new_movments.limbs_list[1].position.x)
+# 			y2 = int(new_movments.limbs_list[1].position.y)
+# 			z2 = int(new_movments.limbs_list[1].position.z)
+# 			x3 = int(new_movments.limbs_list[2].position.x)
+# 			y3 = int(new_movments.limbs_list[2].position.y)
+# 			z3 = int(new_movments.limbs_list[2].position.z)
+# 			x4 = int(new_movments.limbs_list[3].position.x)
+# 			y4 = int(new_movments.limbs_list[3].position.y)
+# 			z4 = int(new_movments.limbs_list[3].position.z)
+# 			x5 = int(new_movments.limbs_list[4].position.x)
+# 			y5 = int(new_movments.limbs_list[4].position.y)
+# 			z5 = int(new_movments.limbs_list[4].position.z)
+# 			x6 = int(new_movments.limbs_list[5].position.x)
+# 			y6 = int(new_movments.limbs_list[5].position.y)
+# 			z6 = int(new_movments.limbs_list[5].position.z)
+# 			print(str(x1) + "/" + str(y1) + "/" + str(z1) + "\t" +str(x2) + "/" + str(y2) + "/" + str(z2) + "\t" + str(x3) + "/" + str(y3) + "/" + str(z3) +"\t" + str(x4) + "/" + str(y4) + "/" + str(z4) + "\t" +str(x5) + "/" + str(y5) + "/" + str(z5) + "\t" + str(x6) + "/" + str(y6) + "/" + str(z6))

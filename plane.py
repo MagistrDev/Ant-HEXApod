@@ -229,19 +229,19 @@ planes[5]._links[LINK_TIBIA]._max_angle = 180
 # 	for element in new_movments.MotionConfig.start_position:
 # 		new_movments.limbs_list.append(new_movments.LimbsList(element.x, element.y, element.z))
 
-# new_movments.init_hexapod()
+new_movments.init_hexapod()
 
-# planes[0]._position = new_movments.limbs_list[0].position
-# planes[1]._position = new_movments.limbs_list[1].position
-# planes[2]._position = new_movments.limbs_list[2].position
-# planes[3]._position = new_movments.limbs_list[3].position
-# planes[4]._position = new_movments.limbs_list[4].position
-# planes[5]._position = new_movments.limbs_list[5].position
+plane.planes[0]._position = new_movments.limbs_list[0].position
+plane.planes[1]._position = new_movments.limbs_list[1].position
+plane.planes[2]._position = new_movments.limbs_list[2].position
+plane.planes[3]._position = new_movments.limbs_list[3].position
+plane.planes[4]._position = new_movments.limbs_list[4].position
+plane.planes[5]._position = new_movments.limbs_list[5].position
 
 # что-то вроду этого цикла
-# while 1:
-# 	for step in range(11):
-# 		new_movments.move(step / 10)
+while 1:
+	for step in range(11):
+		new_movments.move(step / 10)
 # class Point:
 #     def __init__(self):
 #         self._x = 0
