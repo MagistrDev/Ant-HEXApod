@@ -213,7 +213,7 @@ planes[5]._links[LINK_TIBIA]._zero_rotate = 16.7
 planes[5]._links[LINK_TIBIA]._min_angle = 0
 planes[5]._links[LINK_TIBIA]._max_angle = 180
 
-new_movments.limbs_list[0].position.x
+# new_movments.limbs_list[0].position.x
 # def	init_hexapod():
 # 	new_movments.CurrentTrajectoryConfig.curvature = 1.5
 # 	new_movments.CurrentTrajectoryConfig.distance = 20
@@ -229,19 +229,19 @@ new_movments.limbs_list[0].position.x
 # 	for element in new_movments.MotionConfig.start_position:
 # 		new_movments.limbs_list.append(new_movments.LimbsList(element.x, element.y, element.z))
 
-new_movments.init_hexapod()
+# new_movments.init_hexapod()
 
-planes[0]._position = new_movments.limbs_list[0].position
-planes[1]._position = new_movments.limbs_list[1].position
-planes[2]._position = new_movments.limbs_list[2].position
-planes[3]._position = new_movments.limbs_list[3].position
-planes[4]._position = new_movments.limbs_list[4].position
-planes[5]._position = new_movments.limbs_list[5].position
+# planes[0]._position = new_movments.limbs_list[0].position
+# planes[1]._position = new_movments.limbs_list[1].position
+# planes[2]._position = new_movments.limbs_list[2].position
+# planes[3]._position = new_movments.limbs_list[3].position
+# planes[4]._position = new_movments.limbs_list[4].position
+# planes[5]._position = new_movments.limbs_list[5].position
 
 # что-то вроду этого цикла
-while 1:
-	for step in range(11):
-		new_movments.move(step / 10)
+# while 1:
+# 	for step in range(11):
+# 		new_movments.move(step / 10)
 # class Point:
 #     def __init__(self):
 #         self._x = 0
