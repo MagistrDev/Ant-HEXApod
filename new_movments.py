@@ -90,6 +90,7 @@ def process_advanced_trajectory(motion_time: float) -> bool:
 	max_arc_angle: float = curvatur_radius_sign * distance / max_trajectory_radius
 
 	# Calculation points by time
+	global limbs_list
 	for i in range(SUPPORT_LIMBS_COUNT):
 
 		# Inversion motion time if need
@@ -101,7 +102,6 @@ def process_advanced_trajectory(motion_time: float) -> bool:
 		arc_angle_rad: float = (relative_motion_time - 0.5) * max_arc_angle + start_angle_rad[i]
 
 		# Calculation XZY points by time
-		global limbs_list
 		position_x = curvature_radius + trajectory_radius[i] * math.cos(arc_angle_rad)
 		position_z = trajectory_radius[i] * math.sin(arc_angle_rad)
 
@@ -122,13 +122,13 @@ def	init_hexapod():
 	CurrentTrajectoryConfig.curvature = 1500
 	CurrentTrajectoryConfig.distance = 50
 	# стартовые позиции, надо подобрать
-	MotionConfig.start_position = [Vector(-70, -50, 70), Vector(-80, -50, 0), Vector(-70,-50, -70),
-									Vector(70, -50, 70), Vector(-80, -50, 0), Vector(70, -50, -70)]
+	MotionConfig.start_position = [Vector(-20, 0, 20), Vector(-35, 0, 0), Vector(-20, 0, -20),
+									Vector(20, 0, 20), Vector(35, 0, 0), Vector(20, 0, -20)]
 	# Одно из них направление движения. другое по воздуху или по земле
-	MotionConfig.time_directions = [0, 1, 0,
-									1, 0, 1]
-	MotionConfig.trajectories = [1, 0, 1,
-								0, 1, 0]
+	MotionConfig.time_directions = [0, 0, 0,
+									0, 0, 0]
+	MotionConfig.trajectories = [0, 1, 0,
+								1, 0, 1]
 	global limbs_list
 	for element in MotionConfig.start_position:
 		limbs_list.append(LimbsList(element.x, element.y, element.z))
@@ -164,7 +164,7 @@ def change_trajectory_config():
 	CurrentTrajectoryConfig.curvature = int(input("write curvature\n"))
 	CurrentTrajectoryConfig.distance = int(input("write distance\n"))
 
-# init_hexapod()
+init_hexapod()
 # change_direction()
 # for element in MotionConfig.time_directions:
 # 	print(element)
@@ -183,29 +183,56 @@ def change_trajectory_config():
 # 	print("********************")
 
 
-# def cycle():
-# 	new_movments.change_trajectory_config()
-# 	while 1:
-# 		for step in range(11):
-# 			new_movments.move(step / 10)
-# 			for i in range(6):
-# 				plane.pos_arm(i, new_movments.limbs_list[i].position.x, new_movments.limbs_list[i].position.y, new_movments.limbs_list[i].position.z)
-# 			x1 = int(new_movments.limbs_list[0].position.x)
-# 			y1 = int(new_movments.limbs_list[0].position.y)
-# 			z1 = int(new_movments.limbs_list[0].position.z)
-# 			x2 = int(new_movments.limbs_list[1].position.x)
-# 			y2 = int(new_movments.limbs_list[1].position.y)
-# 			z2 = int(new_movments.limbs_list[1].position.z)
-# 			x3 = int(new_movments.limbs_list[2].position.x)
-# 			y3 = int(new_movments.limbs_list[2].position.y)
-# 			z3 = int(new_movments.limbs_list[2].position.z)
-# 			x4 = int(new_movments.limbs_list[3].position.x)
-# 			y4 = int(new_movments.limbs_list[3].position.y)
-# 			z4 = int(new_movments.limbs_list[3].position.z)
-# 			x5 = int(new_movments.limbs_list[4].position.x)
-# 			y5 = int(new_movments.limbs_list[4].position.y)
-# 			z5 = int(new_movments.limbs_list[4].position.z)
-# 			x6 = int(new_movments.limbs_list[5].position.x)
-# 			y6 = int(new_movments.limbs_list[5].position.y)
-# 			z6 = int(new_movments.limbs_list[5].position.z)
-# 			print(str(x1) + "/" + str(y1) + "/" + str(z1) + "\t" +str(x2) + "/" + str(y2) + "/" + str(z2) + "\t" + str(x3) + "/" + str(y3) + "/" + str(z3) +"\t" + str(x4) + "/" + str(y4) + "/" + str(z4) + "\t" +str(x5) + "/" + str(y5) + "/" + str(z5) + "\t" + str(x6) + "/" + str(y6) + "/" + str(z6))
+def cycle():
+	change_trajectory_config()
+	x = 0
+	while 1:
+		for step in range(11):
+			move(step / 10)
+			# for i in range(6):
+			# 	pos_arm(i, limbs_list[i].position.x, limbs_list[i].position.y, limbs_list[i].position.z)
+			x1 = int(limbs_list[0].position.x)
+			y1 = int(limbs_list[0].position.y)
+			z1 = int(limbs_list[0].position.z)
+			x2 = int(limbs_list[1].position.x)
+			y2 = int(limbs_list[1].position.y)
+			z2 = int(limbs_list[1].position.z)
+			x3 = int(limbs_list[2].position.x)
+			y3 = int(limbs_list[2].position.y)
+			z3 = int(limbs_list[2].position.z)
+			x4 = int(limbs_list[3].position.x)
+			y4 = int(limbs_list[3].position.y)
+			z4 = int(limbs_list[3].position.z)
+			x5 = int(limbs_list[4].position.x)
+			y5 = int(limbs_list[4].position.y)
+			z5 = int(limbs_list[4].position.z)
+			x6 = int(limbs_list[5].position.x)
+			y6 = int(limbs_list[5].position.y)
+			z6 = int(limbs_list[5].position.z)
+			print(str(step / 10) + "\t\t\t" + str(x1) + "/" + str(y1) + "/" + str(z1) + "\t\t" +str(x2) + "/" + str(y2) + "/" + str(z2) + "\t\t" + str(x3) + "/" + str(y3) + "/" + str(z3) +"\t\t" + str(x4) + "/" + str(y4) + "/" + str(z4) + "\t\t" +str(x5) + "/" + str(y5) + "/" + str(z5) + "\t\t" + str(x6) + "/" + str(y6) + "/" + str(z6))
+		print()
+		x += 1
+		if x == 2:
+			break
+
+cycle()
+print()
+x1 = int(MotionConfig.start_position[0].x)
+y1 = int(MotionConfig.start_position[0].y)
+z1 = int(MotionConfig.start_position[0].z)
+x2 = int(MotionConfig.start_position[1].x)
+y2 = int(MotionConfig.start_position[1].y)
+z2 = int(MotionConfig.start_position[1].z)
+x3 = int(MotionConfig.start_position[2].x)
+y3 = int(MotionConfig.start_position[2].y)
+z3 = int(MotionConfig.start_position[2].z)
+x4 = int(MotionConfig.start_position[3].x)
+y4 = int(MotionConfig.start_position[3].y)
+z4 = int(MotionConfig.start_position[3].z)
+x5 = int(MotionConfig.start_position[4].x)
+y5 = int(MotionConfig.start_position[4].y)
+z5 = int(MotionConfig.start_position[4].z)
+x6 = int(MotionConfig.start_position[5].x)
+y6 = int(MotionConfig.start_position[5].y)
+z6 = int(MotionConfig.start_position[5].z)
+print(str(x1) + "/" + str(y1) + "/" + str(z1) + "\t" +str(x2) + "/" + str(y2) + "/" + str(z2) + "\t" + str(x3) + "/" + str(y3) + "/" + str(z3) +"\t" + str(x4) + "/" + str(y4) + "/" + str(z4) + "\t" +str(x5) + "/" + str(y5) + "/" + str(z5) + "\t" + str(x6) + "/" + str(y6) + "/" + str(z6))
