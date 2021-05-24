@@ -35,8 +35,6 @@ class MotionConfig:
 	time_directions = []
 	trajectories: int = []
 
-MotionConfig2 = MotionConfig()
-
 class LimbsList:
 	position: Vector
 	def __init__(self, x: float, y: float, z: float):
@@ -127,18 +125,41 @@ def	init_hexapod():
 	MotionConfig.start_position = [Vector(-70, -50, 70), Vector(-80, -50, 0), Vector(-70,-50, -70),
 									Vector(70, -50,70), Vector(80, -50, 0), Vector(70, -50, -70)]
 	# MotionConfig2 = MotionConfig()
-	global MotionConfig2
 	MotionConfig2.start_position = [Vector(-70, -50, 70), Vector(-80, -50, 0), Vector(-70,-50, -70),
 									Vector(70, -50,-70), Vector(80, -50, 0), Vector(70, -50, 70)]
 
 	# Одно из них направление движения. другое по воздуху или по земле
-	MotionConfig.time_directions = [0, 0, 0,
-									0, 0, 0]
+	MotionConfig.time_directions = [1, 0, 1,
+									0, 1, 0]
 	MotionConfig.trajectories = [0, 1, 0,
 								1, 0, 1]
 	global limbs_list
 	for element in MotionConfig.start_position:
 		limbs_list.append(LimbsList(element.x, element.y, element.z))
+
+
+# возможно поменяю на приходящие данные
+# пока замена руками в терминале
+def change_start_position():
+	for i in range(6):
+		tmp = input().split(' ')
+		MotionConfig.start_position[i] = Vector(int(tmp[0], int(tmp[1], int(tmp[2]))))
+
+def change_direction(direction: int):
+	CurrentTrajectoryConfig.curvature = direction
+	
+def change_speed(speed: int):
+	CurrentTrajectoryConfig.distance = speed
+
+def change_high_step(high: int):
+	global LIMB_STEP_HEIGHT
+	LIMB_STEP_HEIGHT = high
+
+def stop():
+	for i in range(SUPPORT_LIMBS_COUNT):
+		limbs_list[i].position.x = MotionConfig.start_position[i].x
+		limbs_list[i].position.y = MotionConfig.start_position[i].y
+		limbs_list[i].position.z = MotionConfig.start_position[i].z
 
 # Движение на шаг, использовать в цикле
 def move(step: float):
