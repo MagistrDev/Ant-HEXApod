@@ -1,12 +1,21 @@
 import math
 import time
 
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
+# Пока так, потом буду функции приводить к юзер френдли, если понадобится #
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
+
 # Don't know from where it is
 SUPPORT_LIMBS_COUNT = 6
 TIME_DIR_REVERSE = 1
 TRAJECTORY_XZ_ADV_Y_CONST = 0
 TRAJECTORY_XZ_ADV_Y_SINUS = 1
+# Высота шага константа меняй через нее
 LIMB_STEP_HEIGHT = 10
+
+direct_tmp = [1, 0, 1, 0, 1, 0]
 
 class CurrentTrajectoryConfig:
 	curvature: float = 0
@@ -83,6 +92,7 @@ def process_advanced_trajectory(motion_time: float) -> bool:
 	max_arc_angle: float = curvatur_radius_sign * distance / max_trajectory_radius
 
 	# Calculation points by time
+	global limbs_list
 	for i in range(SUPPORT_LIMBS_COUNT):
 
 		# Inversion motion time if need
@@ -94,7 +104,6 @@ def process_advanced_trajectory(motion_time: float) -> bool:
 		arc_angle_rad: float = (relative_motion_time - 0.5) * max_arc_angle + start_angle_rad[i]
 
 		# Calculation XZY points by time
-		global limbs_list
 		position_x = curvature_radius + trajectory_radius[i] * math.cos(arc_angle_rad)
 		position_z = trajectory_radius[i] * math.sin(arc_angle_rad)
 
@@ -123,15 +132,16 @@ def	init_hexapod():
 									Vector(70, -50,-70), Vector(80, -50, 0), Vector(70, -50, 70)]
 
 	# Одно из них направление движения. другое по воздуху или по земле
-	MotionConfig.time_directions = [0, 1, 0,
-									1, 0, 1]
-	MotionConfig.trajectories = [1, 0, 1,
-								0, 1, 0]
+	MotionConfig.time_directions = [0, 0, 0,
+									0, 0, 0]
+	MotionConfig.trajectories = [0, 1, 0,
+								1, 0, 1]
 	global limbs_list
 	for element in MotionConfig.start_position:
 		limbs_list.append(LimbsList(element.x, element.y, element.z))
 
-def move_forward(step: float):
+# Движение на шаг, использовать в цикле
+def move(step: float):
 	process_advanced_trajectory(step)
 	if step == 1.0:
 		MotionConfig.time_directions, MotionConfig.trajectories = MotionConfig.trajectories, MotionConfig.time_directions
