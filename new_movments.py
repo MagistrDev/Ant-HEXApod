@@ -14,8 +14,9 @@ TRAJECTORY_XZ_ADV_Y_CONST = 0
 TRAJECTORY_XZ_ADV_Y_SINUS = 1
 # Высота шага константа меняй через нее
 LIMB_STEP_HEIGHT = 10
+HEXAPOD_DIRECTION = 0
 
-direct_tmp = [1, 0, 1, 0, 1, 0]
+direct_tmp = [0, 1, 0, 1, 0, 1]
 
 class CurrentTrajectoryConfig:
 	curvature: float = 0
@@ -124,10 +125,6 @@ def	init_hexapod():
 	# стартовые позиции, надо подобрать
 	MotionConfig.start_position = [Vector(-70, -50, 70), Vector(-80, -50, 0), Vector(-70,-50, -70),
 									Vector(70, -50,70), Vector(80, -50, 0), Vector(70, -50, -70)]
-	# MotionConfig2 = MotionConfig()
-	MotionConfig2.start_position = [Vector(-70, -50, 70), Vector(-80, -50, 0), Vector(-70,-50, -70),
-									Vector(70, -50,-70), Vector(80, -50, 0), Vector(70, -50, 70)]
-
 	# Одно из них направление движения. другое по воздуху или по земле
 	MotionConfig.time_directions = [1, 0, 1,
 									0, 1, 0]
@@ -137,6 +134,9 @@ def	init_hexapod():
 	for element in MotionConfig.start_position:
 		limbs_list.append(LimbsList(element.x, element.y, element.z))
 
+def chose_back_forward():
+	global direct_tmp
+	MotionConfig.time_directions, direct_tmp = direct_tmp, MotionConfig.time_directions
 
 # возможно поменяю на приходящие данные
 # пока замена руками в терминале
@@ -167,6 +167,12 @@ def move(step: float):
 	if step == 1.0:
 		MotionConfig.time_directions, MotionConfig.trajectories = MotionConfig.trajectories, MotionConfig.time_directions
 
+def control(direction: int, trajectroy: int, step: float):
+	global HEXAPOD_DIRECTION
+	if HEXAPOD_DIRECTION != direction:
+		chose_back_forward()
+	change_direction(trajectroy / 100 * 1999)
+	move(step)
 # init_hexapod()
 
 # for x in range(10):
