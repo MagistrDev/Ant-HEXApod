@@ -26,6 +26,8 @@ class MotionConfig:
 	time_directions = []
 	trajectories: int = []
 
+MotionConfig2 = MotionConfig()
+
 class LimbsList:
 	position: Vector
 	def __init__(self, x: float, y: float, z: float):
@@ -110,11 +112,16 @@ def process_advanced_trajectory(motion_time: float) -> bool:
 	return True
 
 def	init_hexapod():
-	CurrentTrajectoryConfig.curvature = 1500
+	CurrentTrajectoryConfig.curvature = 500
 	CurrentTrajectoryConfig.distance = 50
 	# стартовые позиции, надо подобрать
 	MotionConfig.start_position = [Vector(-70, -50, 70), Vector(-80, -50, 0), Vector(-70,-50, -70),
-									Vector(70, -50, 70), Vector(-80, -50, 0), Vector(70, -50, -70)]
+									Vector(70, -50,70), Vector(80, -50, 0), Vector(70, -50, -70)]
+	# MotionConfig2 = MotionConfig()
+	global MotionConfig2
+	MotionConfig2.start_position = [Vector(-70, -50, 70), Vector(-80, -50, 0), Vector(-70,-50, -70),
+									Vector(70, -50,-70), Vector(80, -50, 0), Vector(70, -50, 70)]
+
 	# Одно из них направление движения. другое по воздуху или по земле
 	MotionConfig.time_directions = [0, 1, 0,
 									1, 0, 1]
@@ -129,17 +136,17 @@ def move_forward(step: float):
 	if step == 1.0:
 		MotionConfig.time_directions, MotionConfig.trajectories = MotionConfig.trajectories, MotionConfig.time_directions
 
-init_hexapod()
+# init_hexapod()
 
-for x in range(10):
-	for i in range(11):
-		move_forward(i / 10)
-		# print("----------------------")
-		# for j in range(6):
-		# 	print(limbs_list[j].position.x, limbs_list[j].position.y, limbs_list[j].position.z)
-		# print("-----------------------")
-		print(limbs_list[0].position.x, limbs_list[0].position.y, limbs_list[0].position.z)
-		time.sleep(0.5)
+# for x in range(10):
+# 	for i in range(11):
+# 		move_forward(i / 10)
+# 		# print("----------------------")
+# 		# for j in range(6):
+# 		# 	print(limbs_list[j].position.x, limbs_list[j].position.y, limbs_list[j].position.z)
+# 		# print("-----------------------")
+# 		print(limbs_list[0].position.x, limbs_list[0].position.y, limbs_list[0].position.z)
+# 		time.sleep(0.5)
 
 # for i in range(5):
 # 	process_advanced_trajectory(0.7)
