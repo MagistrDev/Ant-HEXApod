@@ -18,7 +18,6 @@ TRAJECTORY_XZ_ADV_Y_SINUS = 1
 LIMB_STEP_HEIGHT = 10
 HEXAPOD_DIRECTION = 0
 
-apper = CDLL()
 direct_tmp = [0, 1, 0, 1, 0, 1]
 
 class CurrentTrajectoryConfig:
