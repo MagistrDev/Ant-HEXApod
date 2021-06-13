@@ -38,7 +38,7 @@ def DEG_TO_RAD(deg):
 
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-planes = [LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo()]
+# planes = [LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo()]
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -214,14 +214,122 @@ class Hexapod(object):
 			self._timeDirections, self._trajectories = self._trajectories, self._timeDirections
 
 	
+def getPlanes():
+	planes = [LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo(),LimbInfo()]
+
+	planes[0]._links[LINK_COXA]._length = 46.7
+	planes[0]._links[LINK_COXA]._zero_rotate = 25.56
+	planes[0]._links[LINK_COXA]._min_angle = -90
+	planes[0]._links[LINK_COXA]._max_angle = 90
+
+	planes[0]._links[LINK_FEMUR]._length = 90
+	planes[0]._links[LINK_FEMUR]._zero_rotate = 90
+	planes[0]._links[LINK_FEMUR]._min_angle = 0
+	planes[0]._links[LINK_FEMUR]._max_angle = 180
+
+	planes[0]._links[LINK_TIBIA]._length = 122.558
+	planes[0]._links[LINK_TIBIA]._zero_rotate = 16.7
+	planes[0]._links[LINK_TIBIA]._min_angle = 0
+	planes[0]._links[LINK_TIBIA]._max_angle = 180
+
+
+	planes[1]._links[LINK_COXA]._length = 46.7
+	planes[1]._links[LINK_COXA]._zero_rotate = 0
+	planes[1]._links[LINK_COXA]._min_angle = -50
+	planes[1]._links[LINK_COXA]._max_angle = 50
+
+	planes[1]._links[LINK_FEMUR]._length = 90
+	planes[1]._links[LINK_FEMUR]._zero_rotate = 90
+	planes[1]._links[LINK_FEMUR]._min_angle = 0
+	planes[1]._links[LINK_FEMUR]._max_angle = 180
+
+	planes[1]._links[LINK_TIBIA]._length = 122.558
+	planes[1]._links[LINK_TIBIA]._zero_rotate = 16.7
+	planes[1]._links[LINK_TIBIA]._min_angle = 0
+	planes[1]._links[LINK_TIBIA]._max_angle = 180
 
 
 
-check = Hexapod()
-check.calcAdvancedXYZ(0.1)
-print(check._limbsList[0]._x, check._limbsList[0]._y, check._limbsList[0]._z)
-print(check._limbsList[1]._x, check._limbsList[1]._y, check._limbsList[1]._z)
-print(check._limbsList[2]._x, check._limbsList[2]._y, check._limbsList[2]._z)
-print(check._limbsList[3]._x, check._limbsList[3]._y, check._limbsList[3]._z)
-print(check._limbsList[4]._x, check._limbsList[4]._y, check._limbsList[4]._z)
-print(check._limbsList[5]._x, check._limbsList[5]._y, check._limbsList[5]._z)
+	planes[2]._links[LINK_COXA]._length = 46.7
+	planes[2]._links[LINK_COXA]._zero_rotate = -25.56
+	planes[2]._links[LINK_COXA]._min_angle = 90
+	planes[2]._links[LINK_COXA]._max_angle = -90
+
+	planes[2]._links[LINK_FEMUR]._length = 90
+	planes[2]._links[LINK_FEMUR]._zero_rotate = 90
+	planes[2]._links[LINK_FEMUR]._min_angle = 0
+	planes[2]._links[LINK_FEMUR]._max_angle = 180
+
+	planes[2]._links[LINK_TIBIA]._length = 122.558
+	planes[2]._links[LINK_TIBIA]._zero_rotate = 16.7
+	planes[2]._links[LINK_TIBIA]._min_angle = 0
+	planes[2]._links[LINK_TIBIA]._max_angle = 180
+
+
+
+
+	planes[3]._links[LINK_COXA]._length = 46.7
+	planes[3]._links[LINK_COXA]._zero_rotate = 25.56
+	planes[3]._links[LINK_COXA]._min_angle = -90
+	planes[3]._links[LINK_COXA]._max_angle = 90
+
+	planes[3]._links[LINK_FEMUR]._length = 90
+	planes[3]._links[LINK_FEMUR]._zero_rotate = 90
+	planes[3]._links[LINK_FEMUR]._min_angle = 0
+	planes[3]._links[LINK_FEMUR]._max_angle = 180
+
+	planes[3]._links[LINK_TIBIA]._length = 122.558
+	planes[3]._links[LINK_TIBIA]._zero_rotate = 16.7
+	planes[3]._links[LINK_TIBIA]._min_angle = 0
+	planes[3]._links[LINK_TIBIA]._max_angle = 180
+
+
+	planes[4]._links[LINK_COXA]._length = 46.7
+	planes[4]._links[LINK_COXA]._zero_rotate = 0
+	planes[4]._links[LINK_COXA]._min_angle = -50
+	planes[4]._links[LINK_COXA]._max_angle = 50
+
+	planes[4]._links[LINK_FEMUR]._length = 90
+	planes[4]._links[LINK_FEMUR]._zero_rotate = 90
+	planes[4]._links[LINK_FEMUR]._min_angle = 0
+	planes[4]._links[LINK_FEMUR]._max_angle = 180
+
+	planes[4]._links[LINK_TIBIA]._length = 122.558
+	planes[4]._links[LINK_TIBIA]._zero_rotate = 16.7
+	planes[4]._links[LINK_TIBIA]._min_angle = 0
+	planes[4]._links[LINK_TIBIA]._max_angle = 180
+
+
+
+	planes[5]._links[LINK_COXA]._length = 46.7
+	planes[5]._links[LINK_COXA]._zero_rotate = -25.56
+	planes[5]._links[LINK_COXA]._min_angle = -90
+	planes[5]._links[LINK_COXA]._max_angle = 90
+
+	planes[5]._links[LINK_FEMUR]._length = 90
+	planes[5]._links[LINK_FEMUR]._zero_rotate = 90
+	planes[5]._links[LINK_FEMUR]._min_angle = 0
+	planes[5]._links[LINK_FEMUR]._max_angle = 180
+
+	planes[5]._links[LINK_TIBIA]._length = 122.558
+	planes[5]._links[LINK_TIBIA]._zero_rotate = 16.7
+	planes[5]._links[LINK_TIBIA]._min_angle = 0
+	planes[5]._links[LINK_TIBIA]._max_angle = 180
+
+	planes[0]._defPosition = Vector()
+	planes[1]._defPosition = Vector()
+	planes[2]._defPosition = Vector()
+	planes[3]._defPosition = Vector()
+	planes[4]._defPosition = Vector()
+	planes[5]._defPosition = Vector()
+	return planes
+
+
+# check = Hexapod()
+# check.calcAdvancedXYZ(0.1)
+# print(check._limbsList[0]._x, check._limbsList[0]._y, check._limbsList[0]._z)
+# print(check._limbsList[1]._x, check._limbsList[1]._y, check._limbsList[1]._z)
+# print(check._limbsList[2]._x, check._limbsList[2]._y, check._limbsList[2]._z)
+# print(check._limbsList[3]._x, check._limbsList[3]._y, check._limbsList[3]._z)
+# print(check._limbsList[4]._x, check._limbsList[4]._y, check._limbsList[4]._z)
+# print(check._limbsList[5]._x, check._limbsList[5]._y, check._limbsList[5]._z)
