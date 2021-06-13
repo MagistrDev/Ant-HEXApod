@@ -316,12 +316,12 @@ def getPlanes():
 	planes[5]._links[LINK_TIBIA]._min_angle = 0
 	planes[5]._links[LINK_TIBIA]._max_angle = 180
 
-	planes[0]._defPosition = Vector()
-	planes[1]._defPosition = Vector()
-	planes[2]._defPosition = Vector()
-	planes[3]._defPosition = Vector()
-	planes[4]._defPosition = Vector()
-	planes[5]._defPosition = Vector()
+	planes[0]._defPosition = Vector(-80, -50, 0)
+	planes[1]._defPosition = Vector(-70,-50, -70)
+	planes[2]._defPosition = Vector(70, -50, 70)
+	planes[3]._defPosition = Vector(80, -50, 0)
+	planes[4]._defPosition = Vector(80, -50, 0)
+	planes[5]._defPosition = Vector(70, -50, -70)
 	return planes
 
 
