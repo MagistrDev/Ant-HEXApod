@@ -23,7 +23,7 @@ class PWMFPGA(object):
 		self.send([(address & 0xff), (data >> 8), (data & 0xff)])
 
 class ServoFPGA(object):
-	def __init__(self, spi_bus, ch, pulse = 1400, min_pulse = 440, max_pulse = 2600, max_angle = 180, on = 0):
+	def __init__(self, spi_bus, ch, on = 0, pulse = 1400, min_pulse = 440, max_pulse = 2600, max_angle = 180):
 		self.__ch = ch
 		self.__bus = spi_bus
 		self.__minPulse = min_pulse
