@@ -19,8 +19,8 @@ class PWMFPGA(object):
 		self._bus.max_speed_hz = speed_hz
 	def send(self, arr):
 		self._bus.xfer(arr)
-	def send16(self, address, data):
-		self.send([(address & 0xff), (data >> 8), (data & 0xff)])
+def send16(self, address, data):
+	self.xfer([(address & 0xff), (data >> 8), (data & 0xff)])
 
 class ServoFPGA(object):
 	def __init__(self, spi_bus, ch, pulse = 1400, min_pulse = 440, max_pulse = 2600, max_angle = 180, on = 0):
@@ -43,9 +43,9 @@ class ServoFPGA(object):
 		self.__bus.send16(self.__ch, int(pulse))
 	def set_angle(self, angle):
 		self.set_pulse(self.map(angle, 0, self.__maxAngle, self.__minPulse, self.__maxPulse))
-	def set_minpulse(self, minPulse):
+	def set_minPulse(self, minPulse):
 		self.__minPulse = minPulse
-	def set_minpulse(self, maxPulse):
+	def set_maxPulse(self, maxPulse):
 		self.__maxPulse = maxPulse
-	def set_minpulse(self, maxAngle):
+	def set_maxAngle(self, maxAngle):
 		self.__maxAngle = maxAngle
