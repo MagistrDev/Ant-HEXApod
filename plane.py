@@ -113,104 +113,100 @@ def kca(info):
 
 
 
-planes[0]._links[LINK_COXA]._length = 46.7
-planes[0]._links[LINK_COXA]._zero_rotate = 25.56
+planes[0]._links[LINK_COXA]._length = 54.91
+planes[0]._links[LINK_COXA]._zero_rotate = 45
 planes[0]._links[LINK_COXA]._min_angle = -90
 planes[0]._links[LINK_COXA]._max_angle = 90
 
-planes[0]._links[LINK_FEMUR]._length = 90
-planes[0]._links[LINK_FEMUR]._zero_rotate = 90
-planes[0]._links[LINK_FEMUR]._min_angle = 0
-planes[0]._links[LINK_FEMUR]._max_angle = 180
+planes[0]._links[LINK_FEMUR]._length = 75
+planes[0]._links[LINK_FEMUR]._zero_rotate = 95
+planes[0]._links[LINK_FEMUR]._min_angle = 180
+planes[0]._links[LINK_FEMUR]._max_angle = 0
 
-planes[0]._links[LINK_TIBIA]._length = 122.558
-planes[0]._links[LINK_TIBIA]._zero_rotate = 16.7
-planes[0]._links[LINK_TIBIA]._min_angle = 0
-planes[0]._links[LINK_TIBIA]._max_angle = 180
+planes[0]._links[LINK_TIBIA]._length = 121
+planes[0]._links[LINK_TIBIA]._zero_rotate = 10
+planes[0]._links[LINK_TIBIA]._min_angle = 180
+planes[0]._links[LINK_TIBIA]._max_angle = 0
 
 
-planes[1]._links[LINK_COXA]._length = 46.7
+planes[1]._links[LINK_COXA]._length = 54.91
 planes[1]._links[LINK_COXA]._zero_rotate = 0
-planes[1]._links[LINK_COXA]._min_angle = -50
-planes[1]._links[LINK_COXA]._max_angle = 50
+planes[1]._links[LINK_COXA]._min_angle = -90
+planes[1]._links[LINK_COXA]._max_angle = 90
 
-planes[1]._links[LINK_FEMUR]._length = 90
-planes[1]._links[LINK_FEMUR]._zero_rotate = 90
-planes[1]._links[LINK_FEMUR]._min_angle = 0
-planes[1]._links[LINK_FEMUR]._max_angle = 180
+planes[1]._links[LINK_FEMUR]._length = 75
+planes[1]._links[LINK_FEMUR]._zero_rotate = 95
+planes[1]._links[LINK_FEMUR]._min_angle = 180
+planes[1]._links[LINK_FEMUR]._max_angle = 0
 
-planes[1]._links[LINK_TIBIA]._length = 122.558
-planes[1]._links[LINK_TIBIA]._zero_rotate = 16.7
-planes[1]._links[LINK_TIBIA]._min_angle = 0
-planes[1]._links[LINK_TIBIA]._max_angle = 180
-
-
-
-planes[2]._links[LINK_COXA]._length = 46.7
-planes[2]._links[LINK_COXA]._zero_rotate = -25.56
-planes[2]._links[LINK_COXA]._min_angle = 90
-planes[2]._links[LINK_COXA]._max_angle = -90
-
-planes[2]._links[LINK_FEMUR]._length = 90
-planes[2]._links[LINK_FEMUR]._zero_rotate = 90
-planes[2]._links[LINK_FEMUR]._min_angle = 0
-planes[2]._links[LINK_FEMUR]._max_angle = 180
-
-planes[2]._links[LINK_TIBIA]._length = 122.558
-planes[2]._links[LINK_TIBIA]._zero_rotate = 16.7
-planes[2]._links[LINK_TIBIA]._min_angle = 0
-planes[2]._links[LINK_TIBIA]._max_angle = 180
+planes[1]._links[LINK_TIBIA]._length = 121
+planes[1]._links[LINK_TIBIA]._zero_rotate = 10
+planes[1]._links[LINK_TIBIA]._min_angle = 180
+planes[1]._links[LINK_TIBIA]._max_angle = 0
 
 
+planes[2]._links[LINK_COXA]._length = 54.91
+planes[2]._links[LINK_COXA]._zero_rotate = 45
+planes[2]._links[LINK_COXA]._min_angle = -90
+planes[2]._links[LINK_COXA]._max_angle = 90
+
+planes[2]._links[LINK_FEMUR]._length = 75
+planes[2]._links[LINK_FEMUR]._zero_rotate = 95
+planes[2]._links[LINK_FEMUR]._min_angle = 180
+planes[2]._links[LINK_FEMUR]._max_angle = 0
+
+planes[2]._links[LINK_TIBIA]._length = 121
+planes[2]._links[LINK_TIBIA]._zero_rotate = 10
+planes[2]._links[LINK_TIBIA]._min_angle = 180
+planes[2]._links[LINK_TIBIA]._max_angle = 0
 
 
-planes[3]._links[LINK_COXA]._length = 46.7
-planes[3]._links[LINK_COXA]._zero_rotate = 25.56
-planes[3]._links[LINK_COXA]._min_angle = -90
-planes[3]._links[LINK_COXA]._max_angle = 90
+planes[3]._links[LINK_COXA]._length = 54.91
+planes[3]._links[LINK_COXA]._zero_rotate = 45
+planes[3]._links[LINK_COXA]._min_angle = 90
+planes[3]._links[LINK_COXA]._max_angle = -90
 
-planes[3]._links[LINK_FEMUR]._length = 90
-planes[3]._links[LINK_FEMUR]._zero_rotate = 90
-planes[3]._links[LINK_FEMUR]._min_angle = 0
-planes[3]._links[LINK_FEMUR]._max_angle = 180
+planes[3]._links[LINK_FEMUR]._length = 75
+planes[3]._links[LINK_FEMUR]._zero_rotate = 95
+planes[3]._links[LINK_FEMUR]._min_angle = 180
+planes[3]._links[LINK_FEMUR]._max_angle = 0
 
-planes[3]._links[LINK_TIBIA]._length = 122.558
-planes[3]._links[LINK_TIBIA]._zero_rotate = 16.7
-planes[3]._links[LINK_TIBIA]._min_angle = 0
-planes[3]._links[LINK_TIBIA]._max_angle = 180
+planes[3]._links[LINK_TIBIA]._length = 121
+planes[3]._links[LINK_TIBIA]._zero_rotate = 10
+planes[3]._links[LINK_TIBIA]._min_angle = 180
+planes[3]._links[LINK_TIBIA]._max_angle = 0
 
 
-planes[4]._links[LINK_COXA]._length = 46.7
+planes[4]._links[LINK_COXA]._length = 54.91
 planes[4]._links[LINK_COXA]._zero_rotate = 0
-planes[4]._links[LINK_COXA]._min_angle = -50
-planes[4]._links[LINK_COXA]._max_angle = 50
+planes[4]._links[LINK_COXA]._min_angle = 90
+planes[4]._links[LINK_COXA]._max_angle = -90
 
-planes[4]._links[LINK_FEMUR]._length = 90
-planes[4]._links[LINK_FEMUR]._zero_rotate = 90
-planes[4]._links[LINK_FEMUR]._min_angle = 0
-planes[4]._links[LINK_FEMUR]._max_angle = 180
+planes[4]._links[LINK_FEMUR]._length = 75
+planes[4]._links[LINK_FEMUR]._zero_rotate = 95
+planes[4]._links[LINK_FEMUR]._min_angle = 180
+planes[4]._links[LINK_FEMUR]._max_angle = 0
 
-planes[4]._links[LINK_TIBIA]._length = 122.558
-planes[4]._links[LINK_TIBIA]._zero_rotate = 16.7
-planes[4]._links[LINK_TIBIA]._min_angle = 0
-planes[4]._links[LINK_TIBIA]._max_angle = 180
+planes[4]._links[LINK_TIBIA]._length = 121
+planes[4]._links[LINK_TIBIA]._zero_rotate = 10
+planes[4]._links[LINK_TIBIA]._min_angle = 180
+planes[4]._links[LINK_TIBIA]._max_angle = 0
 
 
+planes[5]._links[LINK_COXA]._length = 54.91
+planes[5]._links[LINK_COXA]._zero_rotate = 45
+planes[5]._links[LINK_COXA]._min_angle = 90
+planes[5]._links[LINK_COXA]._max_angle = -90
 
-planes[5]._links[LINK_COXA]._length = 46.7
-planes[5]._links[LINK_COXA]._zero_rotate = -25.56
-planes[5]._links[LINK_COXA]._min_angle = -90
-planes[5]._links[LINK_COXA]._max_angle = 90
+planes[5]._links[LINK_FEMUR]._length = 75
+planes[5]._links[LINK_FEMUR]._zero_rotate = 95
+planes[5]._links[LINK_FEMUR]._min_angle = 180
+planes[5]._links[LINK_FEMUR]._max_angle = 0
 
-planes[5]._links[LINK_FEMUR]._length = 90
-planes[5]._links[LINK_FEMUR]._zero_rotate = 90
-planes[5]._links[LINK_FEMUR]._min_angle = 0
-planes[5]._links[LINK_FEMUR]._max_angle = 180
-
-planes[5]._links[LINK_TIBIA]._length = 122.558
-planes[5]._links[LINK_TIBIA]._zero_rotate = 16.7
-planes[5]._links[LINK_TIBIA]._min_angle = 0
-planes[5]._links[LINK_TIBIA]._max_angle = 180
+planes[5]._links[LINK_TIBIA]._length = 121
+planes[5]._links[LINK_TIBIA]._zero_rotate = 10
+planes[5]._links[LINK_TIBIA]._min_angle = 180
+planes[5]._links[LINK_TIBIA]._max_angle = 0
 
 
 class Point:
