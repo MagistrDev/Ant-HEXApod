@@ -20,7 +20,7 @@ class PWMFPGA(object):
 	def send(self, arr):
 		self._bus.xfer(arr)
 	def send16(self, address, data):
-		self.xfer([(address & 0xff), (data >> 8), (data & 0xff)])
+		self.send([(address & 0xff), (data >> 8), (data & 0xff)])
 
 class ServoFPGA(object):
 	def __init__(self, spi_bus, ch, pulse = 1400, min_pulse = 440, max_pulse = 2600, max_angle = 180, on = 0):
