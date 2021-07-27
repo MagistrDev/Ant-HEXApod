@@ -70,7 +70,7 @@ def kinematic_calculate_angles(pindex):
 	# Move to (X*, Y*, Z*) coordinate system - rotate
 	coxa_zero_rotate_rad = math.radians(coxa_zero_rotate_deg)
 	x1 = x * math.cos(coxa_zero_rotate_rad) + z * math.sin(coxa_zero_rotate_rad)
-	y1 = y
+	y1 = -y
 	z1 = -x * math.sin(coxa_zero_rotate_rad) + z * math.cos(coxa_zero_rotate_rad)
 	# Calculate COXA angle
 	coxa_angle_rad = math.atan2(z1, x1)

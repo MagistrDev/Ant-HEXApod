@@ -64,11 +64,7 @@ RR_TIBIA = ServoFPGA(fpga_chip, 17, 1, 2520)
 arms = [[FL_COXA, FL_FEMUR, FL_TIBIA],[ML_COXA, ML_FEMUR, ML_TIBIA],[RL_COXA, RL_FEMUR, RL_TIBIA],[FR_COXA, FR_FEMUR, FR_TIBIA],[MR_COXA, MR_FEMUR, MR_TIBIA],[RR_COXA, RR_FEMUR, RR_TIBIA]]
 
 def set_arm_ang(index, sh, fore, wr):
-	if index < 3:
-		angle_sh = 90 + sh
-		# print("!")
-	else:
-		angle_sh = 90 - sh
+	angle_sh = 90 - sh
 	# print(str(sh) + " " + str(angle_sh))
 	arms[index][0].set_angle(angle_sh)
 	arms[index][1].set_angle(fore)
