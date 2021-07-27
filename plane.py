@@ -64,13 +64,13 @@ def kinematic_calculate_angles(pindex):
 	femur_length = info._links[LINK_FEMUR]._length
 	tibia_length = info._links[LINK_TIBIA]._length
 	x = info._position._x
-	y = info._position._y
-	z = info._position._z
+	y = -info._position._y
+	z = -info._position._z
 	# print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
 	# Move to (X*, Y*, Z*) coordinate system - rotate
 	coxa_zero_rotate_rad = math.radians(coxa_zero_rotate_deg)
 	x1 = x * math.cos(coxa_zero_rotate_rad) + z * math.sin(coxa_zero_rotate_rad)
-	y1 = -y
+	y1 = y
 	z1 = -x * math.sin(coxa_zero_rotate_rad) + z * math.cos(coxa_zero_rotate_rad)
 	# Calculate COXA angle
 	coxa_angle_rad = math.atan2(z1, x1)
