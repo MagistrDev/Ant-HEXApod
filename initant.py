@@ -6,28 +6,28 @@ from ServoFPGA import *
 
 fpga_chip = PWMFPGA()
 FL_COXA = ServoFPGA(fpga_chip, 2, 1, 1520)
-FL_FEMUR = ServoFPGA(fpga_chip, 1, 1, 1520)
-FL_TIBIA = ServoFPGA(fpga_chip, 0, 1, 1520)
+FL_FEMUR = ServoFPGA(fpga_chip, 1, 1, 2520)
+FL_TIBIA = ServoFPGA(fpga_chip, 0, 1, 2520)
 
 ML_COXA = ServoFPGA(fpga_chip, 4, 1, 1520)
-ML_FEMUR = ServoFPGA(fpga_chip, 5, 1, 1520)
-ML_TIBIA = ServoFPGA(fpga_chip, 3, 1, 1520)
+ML_FEMUR = ServoFPGA(fpga_chip, 5, 1, 2520)
+ML_TIBIA = ServoFPGA(fpga_chip, 3, 1, 2520)
 
 RL_COXA = ServoFPGA(fpga_chip, 6, 1, 1520)
-RL_FEMUR = ServoFPGA(fpga_chip, 7, 1, 1520)
-RL_TIBIA = ServoFPGA(fpga_chip, 8, 1, 1520)
+RL_FEMUR = ServoFPGA(fpga_chip, 7, 1, 2520)
+RL_TIBIA = ServoFPGA(fpga_chip, 8, 1, 2520)
 
 FR_COXA = ServoFPGA(fpga_chip, 9, 1, 1520)
-FR_FEMUR = ServoFPGA(fpga_chip, 10, 1, 1520)
-FR_TIBIA = ServoFPGA(fpga_chip, 11, 1, 1520)
+FR_FEMUR = ServoFPGA(fpga_chip, 10, 1, 2520)
+FR_TIBIA = ServoFPGA(fpga_chip, 11, 1, 2520)
 
 MR_COXA = ServoFPGA(fpga_chip, 12, 1, 1520)
-MR_FEMUR = ServoFPGA(fpga_chip, 13, 1, 1520)
-MR_TIBIA = ServoFPGA(fpga_chip, 14, 1, 1520)
+MR_FEMUR = ServoFPGA(fpga_chip, 13, 1, 2520)
+MR_TIBIA = ServoFPGA(fpga_chip, 14, 1, 2520)
 
 RR_COXA = ServoFPGA(fpga_chip, 15, 1, 1520)
-RR_FEMUR = ServoFPGA(fpga_chip, 16, 1, 1520)
-RR_TIBIA = ServoFPGA(fpga_chip, 17, 1, 1520)
+RR_FEMUR = ServoFPGA(fpga_chip, 16, 1, 2520)
+RR_TIBIA = ServoFPGA(fpga_chip, 17, 1, 2520)
 
 
 
