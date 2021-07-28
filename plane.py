@@ -1,5 +1,6 @@
-import math
+from math import *
 import initant as ant
+from math import XYZ_LINAR, YZ_ARC_Y_LINEAR, XZ_ELLIPTICAL_Y_SINUS
 LINK_COXA = 0
 LINK_FEMUR = 1
 LINK_TIBIA = 2
@@ -68,33 +69,33 @@ def kinematic_calculate_angles(pindex):
 	z = -info._position._z
 	# print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
 	# Move to (X*, Y*, Z*) coordinate system - rotate
-	coxa_zero_rotate_rad = math.radians(coxa_zero_rotate_deg)
-	x1 = x * math.cos(coxa_zero_rotate_rad) + z * math.sin(coxa_zero_rotate_rad)
+	coxa_zero_rotate_rad = radians(coxa_zero_rotate_deg)
+	x1 = x * cos(coxa_zero_rotate_rad) + z * sin(coxa_zero_rotate_rad)
 	y1 = y
-	z1 = -x * math.sin(coxa_zero_rotate_rad) + z * math.cos(coxa_zero_rotate_rad)
+	z1 = -x * sin(coxa_zero_rotate_rad) + z * cos(coxa_zero_rotate_rad)
 	# Calculate COXA angle
-	coxa_angle_rad = math.atan2(z1, x1)
-	info._links[LINK_COXA]._angle = math.degrees(coxa_angle_rad)
+	coxa_angle_rad = atan2(z1, x1)
+	info._links[LINK_COXA]._angle = degrees(coxa_angle_rad)
 	# Prepare for calculation FEMUR and TIBIA angles
 	# Move to (X*, Y*) coordinate system (rotate on axis Y)
-	x1 = x1 * math.cos(coxa_angle_rad) + z1 * math.sin(coxa_angle_rad)
+	x1 = x1 * cos(coxa_angle_rad) + z1 * sin(coxa_angle_rad)
 	# Move to (X**, Y**) coordinate system (remove coxa from calculations)
 	x1 = x1 - coxa_length
 	# Calculate angle between axis X and destination point
-	fi = math.atan2(y1, x1)
+	fi = atan2(y1, x1)
 	# Calculate distance to destination point
-	d = math.sqrt(x1 * x1 + y1 * y1)
+	d = sqrt(x1 * x1 + y1 * y1)
 	if (d > femur_length + tibia_length):
 		return False # Point not attainable
 	# Calculate triangle angles
 	a = tibia_length
 	b = femur_length
 	c = d
-	alpha = math.acos((b * b + c * c - a * a) / (2 * b * c))
-	gamma = math.acos((a * a + b * b - c * c) / (2 * a * b))
+	alpha = acos((b * b + c * c - a * a) / (2 * b * c))
+	gamma = acos((a * a + b * b - c * c) / (2 * a * b))
 	# Calculate FEMUR and TIBIA angle
-	info._links[LINK_FEMUR]._angle = 180 - (femur_zero_rotate_deg - (math.degrees(alpha) - math.degrees(fi)))
-	info._links[LINK_TIBIA]._angle = 180 - (math.degrees(gamma) - tibia_zero_rotate_deg)
+	info._links[LINK_FEMUR]._angle = 180 - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
+	info._links[LINK_TIBIA]._angle = 180 - (degrees(gamma) - tibia_zero_rotate_deg)
 	# print(info._links[LINK_COXA]._angle)
 	# print(info._links[LINK_FEMUR]._angle)
 	# print(info._links[LINK_TIBIA]._angle)
