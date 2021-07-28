@@ -1,5 +1,5 @@
 import math
-import initant as ant
+# import initant as ant
 LINK_COXA = 0
 LINK_FEMUR = 1
 LINK_TIBIA = 2
@@ -209,7 +209,7 @@ class Hexapod(object):
 		self.calcAdvancedXYZ(step, planes)
 		for index in range(self.supportLimbsCount):
 			self.kinematic_calculate_angles(index, planes)
-			ant.set_arm_ang(index, pl[index]._links[0]._angle, pl[index]._links[1]._angle, pl[index]._links[2]._angle)
+			# ant.set_arm_ang(index, pl[index]._links[0]._angle, pl[index]._links[1]._angle, pl[index]._links[2]._angle)
 		if step == 1.0:
 			self._timeDirections, self._trajectories = self._trajectories, self._timeDirections
 
@@ -326,10 +326,11 @@ def getPlanes():
 
 planes = getPlanes()
 check = Hexapod()
-check.calcAdvancedXYZ(0.1)
-print(check._limbsList[0]._x, check._limbsList[0]._y, check._limbsList[0]._z)
-print(check._limbsList[1]._x, check._limbsList[1]._y, check._limbsList[1]._z)
-print(check._limbsList[2]._x, check._limbsList[2]._y, check._limbsList[2]._z)
-print(check._limbsList[3]._x, check._limbsList[3]._y, check._limbsList[3]._z)
-print(check._limbsList[4]._x, check._limbsList[4]._y, check._limbsList[4]._z)
-print(check._limbsList[5]._x, check._limbsList[5]._y, check._limbsList[5]._z)
+# check.calcAdvancedXYZ(0.1, planes)
+check.move(0, 0, 0.1, planes)
+print(planes[0]._position._x, planes[0]._position._x, planes[0]._position._x)
+print(planes[1]._position._x, planes[1]._position._x, planes[1]._position._x)
+print(planes[2]._position._x, planes[2]._position._x, planes[2]._position._x)
+print(planes[3]._position._x, planes[3]._position._x, planes[3]._position._x)
+print(planes[4]._position._x, planes[4]._position._x, planes[4]._position._x)
+print(planes[5]._position._x, planes[5]._position._x, planes[5]._position._x)
