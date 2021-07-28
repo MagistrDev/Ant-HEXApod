@@ -1,5 +1,5 @@
 import math
-# import initant as ant
+import initant as ant
 LINK_COXA = 0
 LINK_FEMUR = 1
 LINK_TIBIA = 2
@@ -197,6 +197,8 @@ class Hexapod(object):
 	def stop(self, planes):
 		for i in range(self.supportLimbsCount):
 			planes[i]._position = planes[i]._defPosition
+			self.kinematic_calculate_angles(i, planes)
+			ant.set_arm_ang(i, planes[i]._links[0]._angle, planes[i]._links[1]._angle, planes[i]._links[2]._angle)
 	
 	def swapDirection(self):
 		self._timeDirections, self.directionTmp = self.directionTmp, self._timeDirections
@@ -209,7 +211,7 @@ class Hexapod(object):
 		self.calcAdvancedXYZ(step, planes)
 		for index in range(self.supportLimbsCount):
 			self.kinematic_calculate_angles(index, planes)
-			# ant.set_arm_ang(index, pl[index]._links[0]._angle, pl[index]._links[1]._angle, pl[index]._links[2]._angle)
+			ant.set_arm_ang(index, planes[index]._links[0]._angle, planes[index]._links[1]._angle, planes[index]._links[2]._angle)
 		if step == 1.0:
 			self._timeDirections, self._trajectories = self._trajectories, self._timeDirections
 
@@ -327,10 +329,12 @@ def getPlanes():
 planes = getPlanes()
 check = Hexapod()
 # check.calcAdvancedXYZ(0.1, planes)
-check.move(0, 0, 0.1, planes)
-print(planes[0]._position._x, planes[0]._position._x, planes[0]._position._x)
-print(planes[1]._position._x, planes[1]._position._x, planes[1]._position._x)
-print(planes[2]._position._x, planes[2]._position._x, planes[2]._position._x)
-print(planes[3]._position._x, planes[3]._position._x, planes[3]._position._x)
-print(planes[4]._position._x, planes[4]._position._x, planes[4]._position._x)
-print(planes[5]._position._x, planes[5]._position._x, planes[5]._position._x)
+for i in range(100):
+	check.move(1, 0, (i/100), planes)
+	if planes[0]._position._y > 200:
+		print(planes[0]._position._x, planes[0]._position._y, planes[0]._position._z)
+		print(planes[1]._position._x, planes[1]._position._y, planes[1]._position._z)
+		print(planes[2]._position._x, planes[2]._position._y, planes[2]._position._z)
+		print(planes[3]._position._x, planes[3]._position._y, planes[3]._position._z)
+		print(planes[4]._position._x, planes[4]._position._y, planes[4]._position._z)
+		print(planes[5]._position._x, planes[5]._position._y, planes[5]._position._z)
