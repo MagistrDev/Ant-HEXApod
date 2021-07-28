@@ -185,7 +185,7 @@ class Hexapod(object):
 			tmp = input().split(' ')
 			planes[i]._defPosition = Vector(int(tmp[0], int(tmp[1], int(tmp[2]))))
 	
-	def changeDirection(self, curvature:):
+	def changeDirection(self, curvature):
 		self._curvature = curvature
 	
 	def changeDistance(self, distance):
@@ -324,12 +324,12 @@ def getPlanes():
 	planes[5]._defPosition = Vector(70, -50, -70)
 	return planes
 
-
-# check = Hexapod()
-# check.calcAdvancedXYZ(0.1)
-# print(check._limbsList[0]._x, check._limbsList[0]._y, check._limbsList[0]._z)
-# print(check._limbsList[1]._x, check._limbsList[1]._y, check._limbsList[1]._z)
-# print(check._limbsList[2]._x, check._limbsList[2]._y, check._limbsList[2]._z)
-# print(check._limbsList[3]._x, check._limbsList[3]._y, check._limbsList[3]._z)
-# print(check._limbsList[4]._x, check._limbsList[4]._y, check._limbsList[4]._z)
-# print(check._limbsList[5]._x, check._limbsList[5]._y, check._limbsList[5]._z)
+planes = getPlanes()
+check = Hexapod()
+check.calcAdvancedXYZ(0.1)
+print(check._limbsList[0]._x, check._limbsList[0]._y, check._limbsList[0]._z)
+print(check._limbsList[1]._x, check._limbsList[1]._y, check._limbsList[1]._z)
+print(check._limbsList[2]._x, check._limbsList[2]._y, check._limbsList[2]._z)
+print(check._limbsList[3]._x, check._limbsList[3]._y, check._limbsList[3]._z)
+print(check._limbsList[4]._x, check._limbsList[4]._y, check._limbsList[4]._z)
+print(check._limbsList[5]._x, check._limbsList[5]._y, check._limbsList[5]._z)
