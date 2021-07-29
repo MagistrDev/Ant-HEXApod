@@ -1,18 +1,18 @@
 import math
-import initant as ant
+# import initant as ant
 LINK_COXA = 0
 LINK_FEMUR = 1
 LINK_TIBIA = 2
 
 class LinkInfo():
-    def __init__(self, length = 0, zero_rotate = 0, min_angle = 0, max_angle = 0, angle = 0):
-        #  Current link state
-        self._angle = 0.0
-        #  Link configuration
-        self._length = 0
-        self._zero_rotate = 0
-        self._min_angle = 0
-        self._max_angle = 0
+	def __init__(self, length = 0, zero_rotate = 0, min_angle = 0, max_angle = 0, angle = 0):
+		#  Current link state
+		self._angle = 0.0
+		#  Link configuration
+		self._length = 0
+		self._zero_rotate = 0
+		self._min_angle = 0
+		self._max_angle = 0
 
 
 class Vector():
@@ -30,11 +30,11 @@ class LimbInfo():
 
 
 def RAD_TO_DEG(rad):
-    return ((rad) * 180.0 / math.pi)
+	return ((rad) * 180.0 / math.pi)
 
 
 def DEG_TO_RAD(deg):
-    return ((deg) * math.pi / 180.0)
+	return ((deg) * math.pi / 180.0)
 
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -85,10 +85,12 @@ class Hexapod(object):
 
 			x0 = planes[i]._defPosition._x
 			z0 = planes[i]._defPosition._z
+			# print(x0, z0)
 
 			# Calculation trajectory radius
 			elementTrajectoryRadius = math.sqrt((curvatureRadius - x0) * (curvatureRadius - x0) + z0 * z0)
 			trajectoryRadius.append(elementTrajectoryRadius)
+			# print(elementTrajectoryRadius)
 
 			# Search max trajectory radius
 			if elementTrajectoryRadius > maxTrajectoryRadius:
@@ -114,6 +116,7 @@ class Hexapod(object):
 			
 			# Calculation arc angle for current time
 			arcAngleRad = (relativeMotionTime - 0.5) * maxArcAngle + startAngleRadius[i]
+			# print(arcAngleRad)
 
 			# Calculation XZY points by time
 			positionX = curvatureRadius + trajectoryRadius[i] * math.cos(arcAngleRad)
@@ -158,7 +161,7 @@ class Hexapod(object):
 		# Calculate distance to destination point
 		d = math.sqrt(x1 * x1 + y1 * y1)
 		if (d > femur_length + tibia_length):
-		    return False # Point not attainable
+			return False # Point not attainable
 		# Calculate triangle angles
 		a = tibia_length
 		b = femur_length
@@ -173,11 +176,11 @@ class Hexapod(object):
 		# print(info._links[LINK_TIBIA]._angle)
 		# Check angles
 		if (info._links[LINK_COXA]._angle < info._links[LINK_COXA]._min_angle or info._links[LINK_COXA]._angle > info._links[LINK_COXA]._max_angle):
-		    return False
+			return False
 		if (info._links[LINK_FEMUR]._angle < info._links[LINK_FEMUR]._min_angle or info._links[LINK_FEMUR]._angle > info._links[LINK_FEMUR]._max_angle):
-		    return False
+			return False
 		if (info._links[LINK_TIBIA]._angle < info._links[LINK_TIBIA]._min_angle or info._links[LINK_TIBIA]._angle > info._links[LINK_TIBIA]._max_angle):
-		    return False
+			return False
 		return True
 	
 	def changeDefPostition(self, planes):
@@ -193,27 +196,32 @@ class Hexapod(object):
 	
 	def changeHeightStep(self, height):
 		self.limbStepHeight = height
-	
+	 
 	def stop(self, planes):
 		for i in range(self.supportLimbsCount):
-			planes[i]._position = planes[i]._defPosition
+			self.calcAdvancedXYZ(0.5, planes) # Это костыль, но defPosition багается
+			# planes[i]._position = planes[i]._defPosition
 			self.kinematic_calculate_angles(i, planes)
-			ant.set_arm_ang(i, planes[i]._links[0]._angle, planes[i]._links[1]._angle, planes[i]._links[2]._angle)
+			# ant.set_arm_ang(i, planes[i]._links[0]._angle, planes[i]._links[1]._angle, planes[i]._links[2]._angle)
 	
 	def swapDirection(self):
 		self._timeDirections, self.directionTmp = self.directionTmp, self._timeDirections
 	
 	def move(self, direction, curvature, step, planes):
 		if self.hexapodDirection != direction:
+			# print("A")
+			self.hexapodDirection = direction
 			self.stop(planes)
 			self.swapDirection()
+			return False
 		self.changeDirection(int(curvature / 100 * 1999))
 		self.calcAdvancedXYZ(step, planes)
 		for index in range(self.supportLimbsCount):
 			self.kinematic_calculate_angles(index, planes)
-			ant.set_arm_ang(index, planes[index]._links[0]._angle, planes[index]._links[1]._angle, planes[index]._links[2]._angle)
+			# ant.set_arm_ang(index, planes[index]._links[0]._angle, planes[index]._links[1]._angle, planes[index]._links[2]._angle)
 		if step == 1.0:
-			self._timeDirections, self._trajectories = self._trajectories, self._timeDirections
+			self._trajectories.reverse()
+			# self._timeDirections, self._trajectories = self._trajectories, self._timeDirections
 
 	
 def getPlanes():
@@ -318,23 +326,44 @@ def getPlanes():
 	planes[5]._links[LINK_TIBIA]._min_angle = 0
 	planes[5]._links[LINK_TIBIA]._max_angle = 180
 
-	planes[0]._defPosition = Vector(-80, -50, 0)
-	planes[1]._defPosition = Vector(-70,-50, -70)
-	planes[2]._defPosition = Vector(70, -50, 70)
-	planes[3]._defPosition = Vector(80, -50, 0)
-	planes[4]._defPosition = Vector(80, -50, 0)
-	planes[5]._defPosition = Vector(70, -50, -70)
+	# planes[0]._defPosition = Vector(-150, 0, -50)
+	# planes[1]._defPosition = Vector(-150, 0, 0)
+	# planes[2]._defPosition = Vector(-150, 0, 50)
+	# planes[3]._defPosition = Vector(150, 0, -50)
+	# planes[4]._defPosition = Vector(150, 0, 0)
+	# planes[5]._defPosition = Vector(150, 0, 50)
+
+	planes[0]._defPosition = Vector(-80.0, -50.0, 0.01)
+	planes[1]._defPosition = Vector(-70.0,-50.0, -70)
+	planes[2]._defPosition = Vector(70.0, -50.0, 70)
+	planes[3]._defPosition = Vector(80.0, -50.0, 0.01)
+	planes[4]._defPosition = Vector(80.0, -50.0, 0.01)
+	planes[5]._defPosition = Vector(70.0, -50.0, -70)
 	return planes
 
 planes = getPlanes()
 check = Hexapod()
-# check.calcAdvancedXYZ(0.1, planes)
-for i in range(100):
-	check.move(1, 0, (i/100), planes)
-	if planes[0]._position._y > 200:
-		print(planes[0]._position._x, planes[0]._position._y, planes[0]._position._z)
-		print(planes[1]._position._x, planes[1]._position._y, planes[1]._position._z)
-		print(planes[2]._position._x, planes[2]._position._y, planes[2]._position._z)
-		print(planes[3]._position._x, planes[3]._position._y, planes[3]._position._z)
-		print(planes[4]._position._x, planes[4]._position._y, planes[4]._position._z)
-		print(planes[5]._position._x, planes[5]._position._y, planes[5]._position._z)
+check.limbStepHeight = 50
+check._distance = 60
+q = 0
+
+# o = check.calcAdvancedXYZ(1.0, planes)
+# print(planes[0]._position._x, planes[0]._position._y, planes[0]._position._z)
+# print(planes[1]._position._x, planes[1]._position._y, planes[1]._position._z)
+# print(planes[2]._position._x, planes[2]._position._y, planes[2]._position._z)
+# print(planes[3]._position._x, planes[3]._position._y, planes[3]._position._z)
+# print(planes[4]._position._x, planes[4]._position._y, planes[4]._position._z)
+# print(planes[5]._position._x, planes[5]._position._y, planes[5]._position._z)
+
+while q == 0:
+	for i in range(101):
+		# print(i)
+		check.move(1, 0, (i/100), planes)
+		if planes[0]._position._y > 200:
+			print(planes[0]._position._x, planes[0]._position._y, planes[0]._position._z)
+			print(planes[1]._position._x, planes[1]._position._y, planes[1]._position._z)
+			print(planes[2]._position._x, planes[2]._position._y, planes[2]._position._z)
+			print(planes[3]._position._x, planes[3]._position._y, planes[3]._position._z)
+			print(planes[4]._position._x, planes[4]._position._y, planes[4]._position._z)
+			print(planes[5]._position._x, planes[5]._position._y, planes[5]._position._z)
+			q = 1
