@@ -1,4 +1,5 @@
 import math
+from time import sleep
 import initant as ant
 LINK_COXA = 0
 LINK_FEMUR = 1
@@ -130,7 +131,7 @@ class Hexapod(object):
 		z1 = -x * math.sin(coxa_zero_rotate_rad) + z * math.cos(coxa_zero_rotate_rad)
 		# Calculate COXA angle
 		coxa_angle_rad = math.atan2(z1, x1)
-		info._links[LINK_COXA]._angle = RAD_TO_DEG(coxa_angle_rad)
+		info._links[LINK_COXA]._angle = math.degrees(coxa_angle_rad)
 		# Prepare for calculation FEMUR and TIBIA angles
 		# Move to (X*, Y*) coordinate system (rotate on axis Y)
 		x1 = x1 * math.cos(coxa_angle_rad) + z1 * math.sin(coxa_angle_rad)
@@ -149,8 +150,8 @@ class Hexapod(object):
 		alpha = math.acos((b * b + c * c - a * a) / (2 * b * c))
 		gamma = math.acos((a * a + b * b - c * c) / (2 * a * b))
 		# Calculate FEMUR and TIBIA angle
-		info._links[LINK_FEMUR]._angle = femur_zero_rotate_deg - RAD_TO_DEG(alpha) - RAD_TO_DEG(fi)
-		info._links[LINK_TIBIA]._angle = RAD_TO_DEG(gamma) - tibia_zero_rotate_deg
+		info._links[LINK_FEMUR]._angle = 180 - (femur_zero_rotate_deg - (math.degrees(alpha) - math.degrees(fi)))
+		info._links[LINK_TIBIA]._angle = 180 - (math.degrees(gamma) - tibia_zero_rotate_deg)
 		# print(info._links[LINK_COXA]._angle)
 		# print(info._links[LINK_FEMUR]._angle)
 		# print(info._links[LINK_TIBIA]._angle)
@@ -175,6 +176,8 @@ class Hexapod(object):
 	def stop(self, planes):
 		for i in range(self.supportLimbsCount):
 			planes[i]._position = planes[i]._defPosition
+			self.kinematic_calculate_angles(i, planes)
+			ant.set_arm_ang(i, planes[i]._links[0]._angle, planes[i]._links[1]._angle, planes[i]._links[2]._angle)
 	def swapDirection(self):
 		self._timeDirections, self.directionTmp = self.directionTmp, self._timeDirections
 	def move(self, direction, curvature, step, planes):
@@ -263,12 +266,12 @@ def getPlanes():
 	planes[5]._links[LINK_TIBIA]._zero_rotate = 11.8
 	planes[5]._links[LINK_TIBIA]._min_angle = 180
 	planes[5]._links[LINK_TIBIA]._max_angle = 0
-	planes[0]._defPosition = Vector(-100, 0, -50)
-	planes[1]._defPosition = Vector(-100, 0, 0)
-	planes[2]._defPosition = Vector(-100, 0, 50)
-	planes[3]._defPosition = Vector(100, 0, -50)
-	planes[4]._defPosition = Vector(100, 0, 0)
-	planes[5]._defPosition = Vector(100, 0, 50)
+	planes[0]._defPosition = Vector(-150, 0, -50)
+	planes[1]._defPosition = Vector(-150, 0, 0)
+	planes[2]._defPosition = Vector(-150, 0, 50)
+	planes[3]._defPosition = Vector(150, 0, -50)
+	planes[4]._defPosition = Vector(150, 0, 0)
+	planes[5]._defPosition = Vector(150, 0, 50)
 	return planes
 
 def en_all():
@@ -293,11 +296,20 @@ def en_all():
 
 planes = getPlanes()
 check = Hexapod()
+check.limbStepHeight  = 50
+check._distance = 60
 # check.calcAdvancedXYZ(0.1, planes)
-check.move(0, 0, 0.1, planes)
-print(planes[0]._position._x, planes[0]._position._x, planes[0]._position._x)
-print(planes[1]._position._x, planes[1]._position._x, planes[1]._position._x)
-print(planes[2]._position._x, planes[2]._position._x, planes[2]._position._x)
-print(planes[3]._position._x, planes[3]._position._x, planes[3]._position._x)
-print(planes[4]._position._x, planes[4]._position._x, planes[4]._position._x)
-print(planes[5]._position._x, planes[5]._position._x, planes[5]._position._x)
+# check.move(0, 0, 0.1, planes)
+def bla(step,curvature):
+	check.move(0, curvature, step, planes)
+	print(round(planes[0]._position._x), round(planes[0]._position._y), round(planes[0]._position._z))
+	print(round(planes[1]._position._x), round(planes[1]._position._y), round(planes[1]._position._z))
+	print(round(planes[2]._position._x), round(planes[2]._position._y), round(planes[2]._position._z))
+	print(round(planes[3]._position._x), round(planes[3]._position._y), round(planes[3]._position._z))
+	print(round(planes[4]._position._x), round(planes[4]._position._y), round(planes[4]._position._z))
+	print(round(planes[5]._position._x), round(planes[5]._position._y), round(planes[5]._position._z))
+
+while 1:
+	for i in range(101):
+		check.move(1, 0, (i/100), planes)
+		sleep(0.01)
