@@ -42,30 +42,37 @@ class LimbInfo():
 		self._start_angle_r = 0
 		self._time_directions = time_directions
 		self._trajectories = trajectories
-	def calculate_angles(self, point = -1):
+	def calculate_angles(self, point = None):
 		coxa_zero_rotate_deg = self._coxa._zero_rotate
 		femur_zero_rotate_deg = self._femur._zero_rotate
 		tibia_zero_rotate_deg = self._tibia._zero_rotate
 		coxa_length = self._coxa._length
 		femur_length = self._femur._length
 		tibia_length = self._tibia._length
-		if isinstance(point, int):
+		if point == None:
+			# print("!!!!!!!!!def_point")
 			x = self._position._x
 			y = self._position._y
 			z = self._position._z
 		elif isinstance(point, point_3d_t):
-			x = point._position._x
-			y = point._position._y
-			z = point._position._z
+			# print("!!!!!!!!!pointd_3d")
+			x = point._x
+			y = point._y
+			z = point._z
+			self._position.change_point(x,-y,-z)
 		elif isinstance(point, list):
+			# print("!!!!!!!!!list")
 			x = point[0]
 			y = point[1]
 			z = point[2]
+			self._position.change_point(x,-y,-z)
 		elif isinstance(point, dict):
+			# print("!!!!!!!!!dict")
 			x = point["x"]
 			y = point["y"]
 			z = point["z"]
-		self._position.change_point(x,-y,-z)
+			self._position.change_point(x,-y,-z)
+		# print("point", self._position._x, self._position._y, self._position._z)
 		# Move to (X*, Y*, Z*) coordinate system - rotate
 		coxa_zero_rotate_rad = radians(coxa_zero_rotate_deg)
 		x1 = x * cos(coxa_zero_rotate_rad) + z * sin(coxa_zero_rotate_rad)
@@ -92,23 +99,34 @@ class LimbInfo():
 		gamma = acos((a * a + b * b - c * c) / (2 * a * b))
 		# Calculate FEMUR and TIBIA angle
 		# Check angles
-		if (self._coxa._angle < self._coxa._min_angle or self._coxa._angle > self._coxa._max_angle):
+		a1 = 90 + degrees(coxa_angle_rad)
+		a2 = self._femur._max_angle - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
+		a3 = self._tibia._max_angle - (degrees(gamma) - tibia_zero_rotate_deg)
+		# print("angles_to",a1,a2,a3)
+		if (a1 < self._coxa._min_angle or a1 > self._coxa._max_angle):
 			return False
-		if (self._femur._angle < self._femur._min_angle or self._femur._angle > self._femur._max_angle):
+		if (a2 < self._femur._min_angle or a2 > self._femur._max_angle):
 			return False
-		if (self._tibia._angle < self._tibia._min_angle or self._tibia._angle > self._tibia._max_angle):
+		if (a3 < self._tibia._min_angle or a3 > self._tibia._max_angle):
 			return False
-		self._coxa._angle = degrees(coxa_angle_rad)
+		self._coxa._angle = a1
 		# print(self._femur._max_angle, femur_zero_rotate_deg, degrees(alpha), degrees(fi))
-		self._femur._angle = self._femur._max_angle - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
-		self._tibia._angle = self._tibia._max_angle - (degrees(gamma) - tibia_zero_rotate_deg)
+		self._femur._angle = a2
+		self._tibia._angle = a3
+		# print("angles",self._coxa._angle,self._femur._angle,self._tibia._angle)
 		return True
-	def set_angles(self, coxa_angle, femur_angle, tibia_angle):
+	def set_angles(self, coxa_angle = None, femur_angle = None, tibia_angle = None):
+		if coxa_angle == None:
+			coxa_angle = self._coxa._angle
+		if femur_angle == None:
+			femur_angle = self._femur._angle
+		if tibia_angle == None:
+			tibia_angle = self._tibia._angle
 		self._coxa.set_angle(coxa_angle)
 		self._femur.set_angle(femur_angle)
 		self._tibia.set_angle(tibia_angle)
-	def move(self, point = -1):
-		if isinstance(point, int):
+	def move(self, point = None):
+		if point == None:
 			pt = self._position
 		elif isinstance(point, point_3d_t):
 			pt = point
@@ -120,6 +138,7 @@ class LimbInfo():
 			pt = point_3d_t(point["x"], point["y"], point["z"])
 			self._position = pt
 		self.calculate_angles()
+		self.set_angles()
 	def invers_direct(self):
 		self._time_directions = not self._time_directions 
 	def invers_trajectory(self):
@@ -136,16 +155,16 @@ class Bot():
 		self._curvature = curvature
 		self._distance = distance
 		self._hight_step = hight_step
-	def advanced_trajectory(self, curvature = -1, motion_time = -1, distance = -1):
-		if motion_time == -1:
+	def advanced_trajectory(self, curvature = None, motion_time = None, distance = None):
+		if motion_time == None:
 			motion_time = self._step
 		else:
 			self.set_step(motion_time)
-		if curvature == -1:
+		if curvature == None:
 			curvature = self._curvature
 		else:
 			self._curvature = curvature
-		if distance == -1:
+		if distance == None:
 			distance = self._distance
 		else:
 			self._distance = distance
