@@ -92,15 +92,16 @@ class LimbInfo():
 		gamma = acos((a * a + b * b - c * c) / (2 * a * b))
 		# Calculate FEMUR and TIBIA angle
 		# Check angles
-		if (self._links[LimbInfo.LINK_COXA]._angle < self._links[LimbInfo.LINK_COXA]._min_angle or self._links[LimbInfo.LINK_COXA]._angle > self._links[LimbInfo.LINK_COXA]._max_angle):
+		if (self._coxa._angle < self._coxa._min_angle or self._coxa._angle > self._coxa._max_angle):
 			return False
-		if (self._links[LimbInfo.LINK_FEMUR]._angle < self._links[LimbInfo.LINK_FEMUR]._min_angle or self._links[LimbInfo.LINK_FEMUR]._angle > self._links[LimbInfo.LINK_FEMUR]._max_angle):
+		if (self._femur._angle < self._femur._min_angle or self._femur._angle > self._femur._max_angle):
 			return False
-		if (self._links[LimbInfo.LINK_TIBIA]._angle < self._links[LimbInfo.LINK_TIBIA]._min_angle or self._links[LimbInfo.LINK_TIBIA]._angle > self._links[LimbInfo.LINK_TIBIA]._max_angle):
+		if (self._tibia._angle < self._tibia._min_angle or self._tibia._angle > self._tibia._max_angle):
 			return False
 		self._coxa._angle = degrees(coxa_angle_rad)
-		self._femur._angle = self._femur - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
-		self._tibia._angle = self._tibia - (degrees(gamma) - tibia_zero_rotate_deg)
+		# print(self._femur._max_angle, femur_zero_rotate_deg, degrees(alpha), degrees(fi))
+		self._femur._angle = self._femur._max_angle - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
+		self._tibia._angle = self._tibia._max_angle - (degrees(gamma) - tibia_zero_rotate_deg)
 		return True
 	def set_angles(self, coxa_angle, femur_angle, tibia_angle):
 		self._coxa.set_angle(coxa_angle)

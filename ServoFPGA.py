@@ -1,28 +1,36 @@
-# import spidev
+import os
 import time
+
+def IsRunningOnPi():
+	return os.uname()[4].startswith("arm")
+
+if IsRunningOnPi():
+	import spidev
 
 class PWMFPGA(object):
 	def __init__(self, spi_ch = 0, cs = 0, speed_hz = 4000000):
+		self._run_on_pi = IsRunningOnPi()
 		self.__ch = spi_ch
 		self.__cs = cs
 		self.__speed = speed_hz
-		# self._bus = spidev.SpiDev()
+		if self._run_on_pi:
+			self._bus = spidev.SpiDev()
 		self.open()
 		self.set_speed(self.__speed)
 	def __del__(self):
 		self.close()
 	def open(self):
-		# self._bus.open(self.__ch, self.__cs)
-		pass
+		if self._run_on_pi:
+			self._bus.open(self.__ch, self.__cs)
 	def close(self):
-		# self._bus.close()
-		pass
+		if self._run_on_pi:
+			self._bus.close()
 	def set_speed(self, speed_hz):
-		# self._bus.max_speed_hz = speed_hz
-		pass
+		if self._run_on_pi:
+			self._bus.max_speed_hz = speed_hz
 	def send(self, arr):
-		# self._bus.xfer(arr)
-		pass
+		if self._run_on_pi:
+			self._bus.xfer(arr)
 	def send16(self, address, data):
 		self.send([(address & 0xff), (data >> 8), (data & 0xff)])
 
