@@ -1,8 +1,8 @@
-import os
+from platform import platform
 import time
 
 def IsRunningOnPi():
-	return os.uname()[4].startswith("arm")
+	return "arm" in platform()
 
 if IsRunningOnPi():
 	import spidev
