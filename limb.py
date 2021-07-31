@@ -27,7 +27,7 @@ class LinkInfo():
 		self._min_angle = min_angle
 		self._max_angle = max_angle
 	def set_angle(self, angle):
-		self._servo.set_angle = angle
+		self._servo.set_angle() = angle
 
 class LimbInfo():
 	LINK_COXA = 0
