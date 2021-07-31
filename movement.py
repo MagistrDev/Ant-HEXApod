@@ -121,8 +121,8 @@ class Hexapod(object):
 		femur_length = info._links[LINK_FEMUR]._length
 		tibia_length = info._links[LINK_TIBIA]._length
 		x = info._position._x
-		y = info._position._y
-		z = info._position._z
+		y = -info._position._y
+		z = -info._position._z
 		# print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
 		# Move to (X*, Y*, Z*) coordinate system - rotate
 		coxa_zero_rotate_rad = DEG_TO_RAD(coxa_zero_rotate_deg)
@@ -266,12 +266,12 @@ def getPlanes():
 	planes[5]._links[LINK_TIBIA]._zero_rotate = 11.8
 	planes[5]._links[LINK_TIBIA]._min_angle = 180
 	planes[5]._links[LINK_TIBIA]._max_angle = 0
-	planes[0]._defPosition = Vector(-150, 0, -50)
-	planes[1]._defPosition = Vector(-150, 0, 0)
-	planes[2]._defPosition = Vector(-150, 0, 50)
-	planes[3]._defPosition = Vector(150, 0, -50)
-	planes[4]._defPosition = Vector(150, 0, 0)
-	planes[5]._defPosition = Vector(150, 0, 50)
+	planes[0]._defPosition = Vector(-150, 50, -50)
+	planes[1]._defPosition = Vector(-150, 50, 0)
+	planes[2]._defPosition = Vector(-150, 50, 50)
+	planes[3]._defPosition = Vector(150, 50, -50)
+	planes[4]._defPosition = Vector(150, 50, 0)
+	planes[5]._defPosition = Vector(150, 50, 50)
 	return planes
 
 def en_all():
@@ -296,20 +296,41 @@ def en_all():
 
 planes = getPlanes()
 check = Hexapod()
-check.limbStepHeight  = 50
+check.limbStepHeight  = 70
 check._distance = 60
 # check.calcAdvancedXYZ(0.1, planes)
 # check.move(0, 0, 0.1, planes)
-def bla(step,curvature):
-	check.move(0, curvature, step, planes)
-	print(round(planes[0]._position._x), round(planes[0]._position._y), round(planes[0]._position._z))
-	print(round(planes[1]._position._x), round(planes[1]._position._y), round(planes[1]._position._z))
-	print(round(planes[2]._position._x), round(planes[2]._position._y), round(planes[2]._position._z))
-	print(round(planes[3]._position._x), round(planes[3]._position._y), round(planes[3]._position._z))
-	print(round(planes[4]._position._x), round(planes[4]._position._y), round(planes[4]._position._z))
-	print(round(planes[5]._position._x), round(planes[5]._position._y), round(planes[5]._position._z))
+def bla(step,curvature,direction):
+	check.move(direction, curvature, step, planes)
+	print(int(curvature / 100 * 1999))
+	print(round(planes[0]._position._x,3), round(planes[0]._position._y,3), round(planes[0]._position._z,3))
+	print(round(planes[1]._position._x,3), round(planes[1]._position._y,3), round(planes[1]._position._z,3))
+	print(round(planes[2]._position._x,3), round(planes[2]._position._y,3), round(planes[2]._position._z,3))
+	print(round(planes[3]._position._x,3), round(planes[3]._position._y,3), round(planes[3]._position._z,3))
+	print(round(planes[4]._position._x,3), round(planes[4]._position._y,3), round(planes[4]._position._z,3))
+	print(round(planes[5]._position._x,3), round(planes[5]._position._y,3), round(planes[5]._position._z,3))
+
+
+def pr_defpos():
+	print(round(planes[0]._defPosition._x), round(planes[0]._defPosition._y), round(planes[0]._defPosition._z))
+	print(round(planes[1]._defPosition._x), round(planes[1]._defPosition._y), round(planes[1]._defPosition._z))
+	print(round(planes[2]._defPosition._x), round(planes[2]._defPosition._y), round(planes[2]._defPosition._z))
+	print(round(planes[3]._defPosition._x), round(planes[3]._defPosition._y), round(planes[3]._defPosition._z))
+	print(round(planes[4]._defPosition._x), round(planes[4]._defPosition._y), round(planes[4]._defPosition._z))
+	print(round(planes[5]._defPosition._x), round(planes[5]._defPosition._y), round(planes[5]._defPosition._z))
 
 while 1:
+def step1(curvature):
 	for i in range(101):
-		check.move(1, 0, (i/100), planes)
-		sleep(0.01)
+		check.move(0, curvature, (i/100), planes)
+		sleep(0.1)
+
+step = 0.05
+inc = 1
+def	n_ste(curvature):
+	global step, inc
+	check.move(0, curvature, step, planes)
+	if step == 1 or step == 0:
+		inc = -inc
+	step = step + (0.05 * inc)
+	print(step, inc)

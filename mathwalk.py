@@ -21,33 +21,34 @@ from math import *
 #     sequence_id_t available_sequences[SUPPORT_SEQUENCE_COUNT];
 	
 # } sequence_info_t;
-def XYZ_LINAR(t, pos0, pos1):
-	ret = point_3d_t()
-	ret._x = t * (pos1._x - pos0._x) / 180.0 + pos0._x
-	ret._y = t * (pos1._y - pos0._y) / 180.0 + pos0._y
-	ret._z = t * (pos1._z - pos0._z) / 180.0 + pos0._z
-	return ret
+class MathWalk:
+	def XYZ_LINAR(t, pos0, pos1):
+		ret = point_3d_t()
+		ret._x = t * (pos1._x - pos0._x) / 180.0 + pos0._x
+		ret._y = t * (pos1._y - pos0._y) / 180.0 + pos0._y
+		ret._z = t * (pos1._z - pos0._z) / 180.0 + pos0._z
+		return ret
+	def YZ_ARC_Y_LINEAR(t, pos0, pos1):
+		ret = point_3d_t()
+		R = sqrt(pos0._x * pos0._x + pos0._z * pos0._z)
+		atan0 = degrees(atan2(pos0._x, pos0._z))
+		atan1 = degrees(atan2(pos1._x, pos1._z))
+		t_mapped_rad = radians(t * (atan1 - atan0) / 180.0 + atan0)
+		ret._x = R * sin(t_mapped_rad); # Circle Y
+		ret._y = t * (pos1._y - pos0._y) / 180.0 + pos0._y
+		ret._z = R * cos(t_mapped_rad); # Circle X
+		return ret
+	def XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1):
+		ret = point_3d_t()
+		a = (pos1._z - pos0._z) / 2.0
+		b = (pos1._x - pos0._x)
+		c = (pos1._y - pos0._y)
+		ret._x = b * sin(radians(180.0 - t)) + pos0._x # circle Y
+		ret._y = c * sin(radians(t)) + pos0._y
+		ret._z = a * cos(radians(180.0 - t)) + pos0._z + a
+		return ret
 
-def YZ_ARC_Y_LINEAR(t, pos0, pos1):
-	ret = point_3d_t()
-	R = sqrt(pos0._x * pos0._x + pos0._z * pos0._z)
-	atan0 = degrees(atan2(pos0._x, pos0._z))
-	atan1 = degrees(atan2(pos1._x, pos1._z))
-	t_mapped_rad = radians(t * (atan1 - atan0) / 180.0 + atan0)
-	ret._x = R * sin(t_mapped_rad); # Circle Y
-	ret._y = t * (pos1._y - pos0._y) / 180.0 + pos0._y
-	ret._z = R * cos(t_mapped_rad); # Circle X
-	return ret
 
-def XZ_ELLIPTICAL_Y_SINUS(t, pos0, pos1):
-	ret = point_3d_t()
-	a = (pos1._z - pos0._z) / 2.0
-	b = (pos1._x - pos0._x)
-	c = (pos1._y - pos0._y)
-	ret._x = b * sin(radians(180.0 - t)) + pos0._x # circle Y
-	ret._y = c * sin(radians(t)) + pos0._y
-	ret._z = a * cos(radians(180.0 - t)) + pos0._z + a
-	return ret
 
 pos0_f = point_3d_t(90,-120,30)
 pos1_f = point_3d_t(90,-120,100)

@@ -1,6 +1,6 @@
 from math import *
 import initant as ant
-from math import XYZ_LINAR, YZ_ARC_Y_LINEAR, XZ_ELLIPTICAL_Y_SINUS
+from mathwalk import XYZ_LINAR, YZ_ARC_Y_LINEAR, XZ_ELLIPTICAL_Y_SINUS
 LINK_COXA = 0
 LINK_FEMUR = 1
 LINK_TIBIA = 2
@@ -96,9 +96,6 @@ def kinematic_calculate_angles(pindex):
 	# Calculate FEMUR and TIBIA angle
 	info._links[LINK_FEMUR]._angle = 180 - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
 	info._links[LINK_TIBIA]._angle = 180 - (degrees(gamma) - tibia_zero_rotate_deg)
-	# print(info._links[LINK_COXA]._angle)
-	# print(info._links[LINK_FEMUR]._angle)
-	# print(info._links[LINK_TIBIA]._angle)
 	# Check angles
 	if (info._links[LINK_COXA]._angle < info._links[LINK_COXA]._min_angle or info._links[LINK_COXA]._angle > info._links[LINK_COXA]._max_angle):
 		return False
