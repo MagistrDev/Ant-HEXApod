@@ -76,7 +76,7 @@ class LimbInfo():
 		# Move to (X*, Y*, Z*) coordinate system - rotate
 		coxa_zero_rotate_rad = radians(coxa_zero_rotate_deg)
 		x1 = x * cos(coxa_zero_rotate_rad) + z * sin(coxa_zero_rotate_rad)
-		y1 = y
+		y1 = -y
 		z1 = -x * sin(coxa_zero_rotate_rad) + z * cos(coxa_zero_rotate_rad)
 		# Calculate COXA angle
 		coxa_angle_rad = atan2(z1, x1)
