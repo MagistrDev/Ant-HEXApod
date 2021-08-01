@@ -103,12 +103,12 @@ class LimbInfo():
 		a2 = self._femur._max_angle - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
 		a3 = self._tibia._max_angle - (degrees(gamma) - tibia_zero_rotate_deg)
 		print("angles_to",a1,a2,a3,"\t",x,-y,-z)
-		if (a1 < self._coxa._min_angle or a1 > self._coxa._max_angle):
-			return False
-		if (a2 < self._femur._min_angle or a2 > self._femur._max_angle):
-			return False
-		if (a3 < self._tibia._min_angle or a3 > self._tibia._max_angle):
-			return False
+		# if (a1 < self._coxa._min_angle or a1 > self._coxa._max_angle):
+		# 	return False
+		# if (a2 < self._femur._min_angle or a2 > self._femur._max_angle):
+		# 	return False
+		# if (a3 < self._tibia._min_angle or a3 > self._tibia._max_angle):
+		# 	return False
 		self._coxa._angle = a1
 		# print(self._femur._max_angle, femur_zero_rotate_deg, degrees(alpha), degrees(fi))
 		self._femur._angle = a2
