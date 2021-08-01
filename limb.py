@@ -276,12 +276,12 @@ link_rr_coxa =  LinkInfo(RR_COXA, 55, 45, -90, 90, 0)
 link_rr_femur = LinkInfo(RR_FEMUR, 75, 85, 0, 180, 0)
 link_rr_tibia = LinkInfo(RR_TIBIA, 121, 11.8, 0, 180, 0)
 
-limb_fl = LimbInfo(link_fl_coxa, link_fl_femur, link_fl_tibia, point_3d_t(-170, -50, 50),0,1)
-limb_ml = LimbInfo(link_ml_coxa, link_ml_femur, link_ml_tibia, point_3d_t(-170, -50, 0),1,0)
-limb_rl = LimbInfo(link_rl_coxa, link_rl_femur, link_rl_tibia, point_3d_t(-170, -50, -50),0,1)
-limb_fr = LimbInfo(link_fr_coxa, link_fr_femur, link_fr_tibia, point_3d_t(170, -50, 50),1,0)
-limb_mr = LimbInfo(link_mr_coxa, link_mr_femur, link_mr_tibia, point_3d_t(170, -50, 0),0,1)
-limb_rr = LimbInfo(link_rr_coxa, link_rr_femur, link_rr_tibia, point_3d_t(170, -50, -50),1,0)
+limb_fl = LimbInfo(link_fl_coxa, link_fl_femur, link_fl_tibia, point_3d_t(-170, -100, 50),0,1)
+limb_ml = LimbInfo(link_ml_coxa, link_ml_femur, link_ml_tibia, point_3d_t(-170, -100, 0),1,0)
+limb_rl = LimbInfo(link_rl_coxa, link_rl_femur, link_rl_tibia, point_3d_t(-170, -100, -50),0,1)
+limb_fr = LimbInfo(link_fr_coxa, link_fr_femur, link_fr_tibia, point_3d_t(170, -100, 50),1,0)
+limb_mr = LimbInfo(link_mr_coxa, link_mr_femur, link_mr_tibia, point_3d_t(170, -100, 0),0,1)
+limb_rr = LimbInfo(link_rr_coxa, link_rr_femur, link_rr_tibia, point_3d_t(170, -100, -50),1,0)
 
 bot = Bot(limb_fl, limb_ml, limb_rl, limb_fr, limb_mr, limb_rr)
 
