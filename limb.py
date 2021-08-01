@@ -99,7 +99,7 @@ class LimbInfo():
 		gamma = acos((a * a + b * b - c * c) / (2 * a * b))
 		# Calculate FEMUR and TIBIA angle
 		# Check angles
-		a1 = 90 + degrees(coxa_angle_rad)
+		a1 = degrees(coxa_angle_rad)
 		a2 = self._femur._max_angle - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
 		a3 = self._tibia._max_angle - (degrees(gamma) - tibia_zero_rotate_deg)
 		print("angles_to",a1,a2,a3,"\t",x,-y,-z)
@@ -251,15 +251,15 @@ class Bot():
 			self.inc_step()
 			sleep(self._delay)
 
-link_fl_coxa =  LinkInfo(FL_COXA, 55, -135, -90, 90, 0)
+link_fl_coxa =  LinkInfo(FL_COXA, 55, -135, 90, -90, 0)
 link_fl_femur = LinkInfo(FL_FEMUR, 75, 85, 0, 180, 0)
 link_fl_tibia = LinkInfo(FL_TIBIA, 121, 11.8, 0, 180, 0)
 
-link_ml_coxa =  LinkInfo(ML_COXA, 55, 180, -90, 90, 0)
+link_ml_coxa =  LinkInfo(ML_COXA, 55, 180, 90, -90, 0)
 link_ml_femur = LinkInfo(ML_FEMUR, 75, 85, 0, 180, 0)
 link_ml_tibia = LinkInfo(ML_TIBIA, 121, 11.8, 0, 180, 0)
 
-link_rl_coxa =  LinkInfo(RL_COXA, 55, 135, -90, 90, 0)
+link_rl_coxa =  LinkInfo(RL_COXA, 55, 135, 90, -90, 0)
 link_rl_femur = LinkInfo(RL_FEMUR, 75, 85, 0, 180, 0)
 link_rl_tibia = LinkInfo(RL_TIBIA, 121, 11.8, 0, 180, 0)
 
