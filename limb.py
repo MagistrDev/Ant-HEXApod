@@ -283,7 +283,7 @@ limb_fr = LimbInfo(link_fr_coxa, link_fr_femur, link_fr_tibia, point_3d_t(150, -
 limb_mr = LimbInfo(link_mr_coxa, link_mr_femur, link_mr_tibia, point_3d_t(150, -100, 0),0,1)
 limb_rr = LimbInfo(link_rr_coxa, link_rr_femur, link_rr_tibia, point_3d_t(150, -100, -50),1,0)
 
-bot = Bot(limb_fl, limb_ml, limb_rl, limb_fr, limb_mr, limb_rr)
+bot = Bot(limb_fl, limb_ml, limb_rl, limb_fr, limb_mr, limb_rr,0.05,0.05,70,50,0.00001)
 
 
 def kca(limb:LimbInfo):
@@ -341,4 +341,8 @@ def walk():
 	bot.advanced_trajectory()
 	bot.move()
 	bot.inc_step()
-	sleep(0.01)
+	sleep(0.05)
+
+def start():
+	while 1:
+		walk()
