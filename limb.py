@@ -122,6 +122,7 @@ class LimbInfo():
 			femur_angle = self._femur._angle
 		if tibia_angle == None:
 			tibia_angle = self._tibia._angle
+		print("set_angles", coxa_angle,femur_angle,tibia_angle)
 		self._coxa.set_angle(coxa_angle)
 		self._femur.set_angle(femur_angle)
 		self._tibia.set_angle(tibia_angle)
