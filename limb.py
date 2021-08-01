@@ -99,7 +99,7 @@ class LimbInfo():
 		gamma = acos((a * a + b * b - c * c) / (2 * a * b))
 		# Calculate FEMUR and TIBIA angle
 		# Check angles
-		a1 = degrees(coxa_angle_rad)
+		a1 = -(degrees(coxa_angle_rad))
 		a2 = self._femur._max_angle - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
 		a3 = self._tibia._max_angle - (degrees(gamma) - tibia_zero_rotate_deg)
 		print("angles_to",a1,a2,a3,"\t",x,-y,-z)
