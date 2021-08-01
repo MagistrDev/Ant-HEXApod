@@ -52,26 +52,26 @@ class LimbInfo():
 		if point == None:
 			# print("!!!!!!!!!def_point")
 			x = self._position._x
-			y = -self._position._y
+			y = self._position._y
 			z = -self._position._z
 		elif isinstance(point, point_3d_t):
 			# print("!!!!!!!!!pointd_3d")
 			x = point._x
-			y = -point._y
+			y = point._y
 			z = -point._z
-			self._position.change_point(x,-y,-z)
+			self._position.change_point(x,y,-z)
 		elif isinstance(point, list):
 			# print("!!!!!!!!!list")
 			x = point[0]
-			y = -point[1]
+			y = point[1]
 			z = -point[2]
-			self._position.change_point(x,-y,-z)
+			self._position.change_point(x,y,-z)
 		elif isinstance(point, dict):
 			# print("!!!!!!!!!dict")
 			x = point["x"]
-			y = -point["y"]
+			y = point["y"]
 			z = -point["z"]
-			self._position.change_point(x,-y,-z)
+			self._position.change_point(x,y,-z)
 		# print("point", self._position._x, self._position._y, self._position._z)
 		# Move to (X*, Y*, Z*) coordinate system - rotate
 		coxa_zero_rotate_rad = radians(coxa_zero_rotate_deg)
