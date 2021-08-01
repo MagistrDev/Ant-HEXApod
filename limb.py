@@ -52,25 +52,25 @@ class LimbInfo():
 		if point == None:
 			# print("!!!!!!!!!def_point")
 			x = self._position._x
-			y = self._position._y
-			z = self._position._z
+			y = -self._position._y
+			z = -self._position._z
 		elif isinstance(point, point_3d_t):
 			# print("!!!!!!!!!pointd_3d")
 			x = point._x
-			y = point._y
-			z = point._z
+			y = -point._y
+			z = -point._z
 			self._position.change_point(x,-y,-z)
 		elif isinstance(point, list):
 			# print("!!!!!!!!!list")
 			x = point[0]
-			y = point[1]
-			z = point[2]
+			y = -point[1]
+			z = -point[2]
 			self._position.change_point(x,-y,-z)
 		elif isinstance(point, dict):
 			# print("!!!!!!!!!dict")
 			x = point["x"]
-			y = point["y"]
-			z = point["z"]
+			y = -point["y"]
+			z = -point["z"]
 			self._position.change_point(x,-y,-z)
 		# print("point", self._position._x, self._position._y, self._position._z)
 		# Move to (X*, Y*, Z*) coordinate system - rotate
@@ -102,7 +102,7 @@ class LimbInfo():
 		a1 = 90 + degrees(coxa_angle_rad)
 		a2 = self._femur._max_angle - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
 		a3 = self._tibia._max_angle - (degrees(gamma) - tibia_zero_rotate_deg)
-		# print("angles_to",a1,a2,a3)
+		print("angles_to",a1,a2,a3,"\t",x,-y,-z)
 		if (a1 < self._coxa._min_angle or a1 > self._coxa._max_angle):
 			return False
 		if (a2 < self._femur._min_angle or a2 > self._femur._max_angle):
@@ -275,11 +275,62 @@ link_rr_coxa =  LinkInfo(RR_COXA, 55, 45, -90, 90, 0)
 link_rr_femur = LinkInfo(RR_FEMUR, 75, 85, 0, 180, 0)
 link_rr_tibia = LinkInfo(RR_TIBIA, 121, 11.8, 0, 180, 0)
 
-limb_fl = LimbInfo(link_fl_coxa, link_fl_femur, link_fl_tibia, point_3d_t(-150, 50, 50),0,1)
-limb_ml = LimbInfo(link_ml_coxa, link_ml_femur, link_ml_tibia, point_3d_t(-150, 50, 0),1,0)
-limb_rl = LimbInfo(link_rl_coxa, link_rl_femur, link_rl_tibia, point_3d_t(-150, 50, -50),0,1)
-limb_fr = LimbInfo(link_fr_coxa, link_fr_femur, link_fr_tibia, point_3d_t(150, 50, 50),1,0)
-limb_mr = LimbInfo(link_mr_coxa, link_mr_femur, link_mr_tibia, point_3d_t(150, 50, 0),0,1)
-limb_rr = LimbInfo(link_rr_coxa, link_rr_femur, link_rr_tibia, point_3d_t(150, 50, -50),1,0)
+limb_fl = LimbInfo(link_fl_coxa, link_fl_femur, link_fl_tibia, point_3d_t(-170, 0, 50),0,1)
+limb_ml = LimbInfo(link_ml_coxa, link_ml_femur, link_ml_tibia, point_3d_t(-170, 0, 0),1,0)
+limb_rl = LimbInfo(link_rl_coxa, link_rl_femur, link_rl_tibia, point_3d_t(-170, 0, -50),0,1)
+limb_fr = LimbInfo(link_fr_coxa, link_fr_femur, link_fr_tibia, point_3d_t(170, 0, 50),1,0)
+limb_mr = LimbInfo(link_mr_coxa, link_mr_femur, link_mr_tibia, point_3d_t(170, 0, 0),0,1)
+limb_rr = LimbInfo(link_rr_coxa, link_rr_femur, link_rr_tibia, point_3d_t(170, 0, -50),1,0)
 
 bot = Bot(limb_fl, limb_ml, limb_rl, limb_fr, limb_mr, limb_rr)
+
+
+def kca(limb:LimbInfo):
+	global planes
+	info = limb
+	coxa_zero_rotate_deg = info._coxa._zero_rotate
+	femur_zero_rotate_deg = info._femur._zero_rotate
+	tibia_zero_rotate_deg = info._tibia._zero_rotate
+	coxa_length = info._coxa._length
+	femur_length = info._femur._length
+	tibia_length = info._tibia._length
+	x = info._position._x
+	y = -info._position._y
+	z = -info._position._z
+	# print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
+	# Move to (X*, Y*, Z*) coordinate system - rotate
+	coxa_zero_rotate_rad = radians(coxa_zero_rotate_deg)
+	x1 = x * cos(coxa_zero_rotate_rad) + z * sin(coxa_zero_rotate_rad)
+	y1 = y
+	z1 = -x * sin(coxa_zero_rotate_rad) + z * cos(coxa_zero_rotate_rad)
+	# Calculate COXA angle
+	coxa_angle_rad = atan2(z1, x1)
+	info._coxa._angle = degrees(coxa_angle_rad)
+	# Prepare for calculation FEMUR and TIBIA angles
+	# Move to (X*, Y*) coordinate system (rotate on axis Y)
+	x1 = x1 * cos(coxa_angle_rad) + z1 * sin(coxa_angle_rad)
+	# Move to (X**, Y**) coordinate system (remove coxa from calculations)
+	x1 = x1 - coxa_length
+	# Calculate angle between axis X and destination point
+	fi = atan2(y1, x1)
+	# Calculate distance to destination point
+	d = sqrt(x1 * x1 + y1 * y1)
+	if (d > femur_length + tibia_length):
+		return False # Point not attainable
+	# Calculate triangle angles
+	a = tibia_length
+	b = femur_length
+	c = d
+	alpha = acos((b * b + c * c - a * a) / (2 * b * c))
+	gamma = acos((a * a + b * b - c * c) / (2 * a * b))
+	# Calculate FEMUR and TIBIA angle
+	info._femur._angle = 180 - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
+	info._tibia._angle = 180 - (degrees(gamma) - tibia_zero_rotate_deg)
+	# Check angles
+	if (info._coxa._angle < info._coxa._min_angle or info._coxa._angle > info._coxa._max_angle):
+		return False
+	if (info._femur._angle < info._femur._min_angle or info._femur._angle > info._femur._max_angle):
+		return False
+	if (info._tibia._angle < info._tibia._min_angle or info._tibia._angle > info._tibia._max_angle):
+		return False
+	return True

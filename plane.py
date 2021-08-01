@@ -55,7 +55,7 @@ def pos_arm(index, x,y,z):
 # @param  info: limb info @ref limb_info_t
 # @return true - calculation success, false - no
 # ***************************************************************************
-def kinematic_calculate_angles(pindex):
+def kca():
 	global planes
 	info = planes[pindex]
 	coxa_zero_rotate_deg = info._links[LINK_COXA]._zero_rotate
