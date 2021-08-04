@@ -5,6 +5,8 @@ import time
 from ServoFPGA import *
 
 fpga_chip = PWMFPGA()
+FL_COXA = ServoFPGA(fpga_chip,2,1,-90,90,1400,530,2420)
+
 FL_COXA = ServoFPGA(fpga_chip, 2, 1, -90, 90, 1520)
 FL_FEMUR = ServoFPGA(fpga_chip, 1, 1, 0, 180, 2520)
 FL_TIBIA = ServoFPGA(fpga_chip, 0, 1, 0, 180, 2520)

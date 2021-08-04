@@ -243,16 +243,21 @@ class Bot():
 			self.invers_direct()
 	def set_step(self,step):
 		self._step = step
-	def full_step(self, curvature = -1):
-		if curvature != -1:
+	def full_step(self, curvature = None, distance = None):
+		if not curvature == None:
 			self.set_curvature(curvature)
-		while self._step <= 1:
+		if not distance == None and distance < 70:
+			self._distance = distance
+		while self._step < 1:
 			self.advanced_trajectory()
 			self.move()
 			self.inc_step()
 			sleep(self._delay)
+		self.advanced_trajectory()
+		self.move()
+		self.inc_step()
 
-link_fl_coxa =  LinkInfo(FL_COXA, 55, -135, 90, -90, 0)
+link_fl_coxa =  LinkInfo(FL_COXA, 55, -135, 90, -90,0)
 link_fl_femur = LinkInfo(FL_FEMUR, 75, 85, 0, 180, 0)
 link_fl_tibia = LinkInfo(FL_TIBIA, 121, 11.8, 0, 180, 0)
 
@@ -286,55 +291,6 @@ limb_rr = LimbInfo(link_rr_coxa, link_rr_femur, link_rr_tibia, point_3d_t(120, -
 bot = Bot(limb_fl, limb_ml, limb_rl, limb_fr, limb_mr, limb_rr,0.05,0.05,70,50,0.00001)
 
 
-def kca(limb:LimbInfo):
-	global planes
-	info = limb
-	coxa_zero_rotate_deg = info._coxa._zero_rotate
-	femur_zero_rotate_deg = info._femur._zero_rotate
-	tibia_zero_rotate_deg = info._tibia._zero_rotate
-	coxa_length = info._coxa._length
-	femur_length = info._femur._length
-	tibia_length = info._tibia._length
-	x = info._position._x
-	y = -info._position._y
-	z = -info._position._z
-	# print("Position xyz" +  str(x) + " / " + str(y) + " / " + str(z))
-	# Move to (X*, Y*, Z*) coordinate system - rotate
-	coxa_zero_rotate_rad = radians(coxa_zero_rotate_deg)
-	x1 = x * cos(coxa_zero_rotate_rad) + z * sin(coxa_zero_rotate_rad)
-	y1 = y
-	z1 = -x * sin(coxa_zero_rotate_rad) + z * cos(coxa_zero_rotate_rad)
-	# Calculate COXA angle
-	coxa_angle_rad = atan2(z1, x1)
-	info._coxa._angle = degrees(coxa_angle_rad)
-	# Prepare for calculation FEMUR and TIBIA angles
-	# Move to (X*, Y*) coordinate system (rotate on axis Y)
-	x1 = x1 * cos(coxa_angle_rad) + z1 * sin(coxa_angle_rad)
-	# Move to (X**, Y**) coordinate system (remove coxa from calculations)
-	x1 = x1 - coxa_length
-	# Calculate angle between axis X and destination point
-	fi = atan2(y1, x1)
-	# Calculate distance to destination point
-	d = sqrt(x1 * x1 + y1 * y1)
-	if (d > femur_length + tibia_length):
-		return False # Point not attainable
-	# Calculate triangle angles
-	a = tibia_length
-	b = femur_length
-	c = d
-	alpha = acos((b * b + c * c - a * a) / (2 * b * c))
-	gamma = acos((a * a + b * b - c * c) / (2 * a * b))
-	# Calculate FEMUR and TIBIA angle
-	info._femur._angle = 180 - (femur_zero_rotate_deg - (degrees(alpha) - degrees(fi)))
-	info._tibia._angle = 180 - (degrees(gamma) - tibia_zero_rotate_deg)
-	# Check angles
-	if (info._coxa._angle < info._coxa._min_angle or info._coxa._angle > info._coxa._max_angle):
-		return False
-	if (info._femur._angle < info._femur._min_angle or info._femur._angle > info._femur._max_angle):
-		return False
-	if (info._tibia._angle < info._tibia._min_angle or info._tibia._angle > info._tibia._max_angle):
-		return False
-	return True
 delay_step = 0.05
 
 def walk():
